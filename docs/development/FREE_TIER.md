@@ -1,10 +1,10 @@
-# Finova Free Tier & Deployment Guide
+# Monerva Free Tier & Deployment Guide
 
-This document outlines how Finova operates entirely within free tier services, detailing limits, performance details, and configurations to run the service under a **$0 budget**.
+This document outlines how Monerva operates entirely within free tier services, detailing limits, performance details, and configurations to run the service under a **$0 budget**.
 
 ## 🏗️ Services Architecture
 
-Finova is deployed using the following free tier services:
+Monerva is deployed using the following free tier services:
 
 | Layer | Provider | Tier | Cost | Limits / Characteristics |
 |---|---|---|---|---|
@@ -26,8 +26,8 @@ Add the following environmental variables:
 * `DATABASE_URL`: Transaction-pooled connection string from Supabase (Port 6543, e.g., using `pgbouncer=true` parameters).
 * `DIRECT_URL`: Direct database connection string from Supabase (Port 5432) required for Prisma migrations.
 * `JWT_SECRET`: A high-entropy secure JWT signing secret (minimum 32 characters).
-* `CLIENT_URL`: The production URL of your Vercel frontend (e.g. `https://finova.vercel.app`) to handle CORS validations.
-* `GEMINI_API_KEY`: API Key from Google AI Studio. If left blank, Finova automatically falls back to an offline rule-based Mock Engine.
+* `CLIENT_URL`: The production URL of your Vercel frontend (e.g. `https://monerva.vercel.app`) to handle CORS validations.
+* `GEMINI_API_KEY`: API Key from Google AI Studio. If left blank, Monerva automatically falls back to an offline rule-based Mock Engine.
 * `PORT`: `5002`
 
 ### 2. Vercel Console (Frontend)
@@ -38,7 +38,7 @@ Vercel environment variables are automatically bundle-time injected:
 ### 3. Google Cloud Console (OAuth & Google Sign-In)
 * Configure **Authorized JavaScript Origins** to exactly include both:
   - Your local workstation dev server: `http://localhost:5173`
-  - Your production Vercel frontend domain: `https://your-finova-frontend.vercel.app`
+  - Your production Vercel frontend domain: `https://your-monerva-frontend.vercel.app`
 
 #### Quick Setup for Google Sign-In (GSI)
 
@@ -46,7 +46,7 @@ Vercel environment variables are automatically bundle-time injected:
 2. Click **Create Credentials → OAuth client ID**.
 3. Choose **Web application**.
 4. Enter:
-   - **Name**: Finova Web App
+   - **Name**: Monerva Web App
    - **Authorized JavaScript origins**: `http://localhost:5173` (and your production Vercel URL)
    - **Authorized redirect URIs**: `http://localhost:5002/api/auth/google/callback` (for local dev only if using traditional OAuth flow)
 5. Click **Create** and copy the **Client ID**.
@@ -61,12 +61,12 @@ Vercel environment variables are automatically bundle-time injected:
 Render's Free Web Service sleeps after 15 minutes of inactivity. The first API request after a sleep period will take about 50 seconds to complete while Render boots the container instance. Subsequent requests will execute instantly.
 
 ### 2. Supabase Storage & Data Limits
-The database is capped at **500 MB** storage. Inactive projects are paused after 1 week of inactivity (easily resumed via the Supabase dashboard). High volume transactions or uploading massive attachment files (if object storage is enabled) might consume this limit. Finova uses local storage fallback for receipt uploads in the development workspace.
+The database is capped at **500 MB** storage. Inactive projects are paused after 1 week of inactivity (easily resumed via the Supabase dashboard). High volume transactions or uploading massive attachment files (if object storage is enabled) might consume this limit. Monerva uses local storage fallback for receipt uploads in the development workspace.
 
 ### 3. Gemini Free API Quota
 If the free tier traffic exceeds Gemini's rate limits (15 Requests Per Minute):
 * The API will return standard rate limit response codes.
-* Finova backend catches the exception and **automatically falls back to the Offline Mock Engine**. This keeps the application fully functional, returning mock categorizations, subscription predictions, and insights instead of crashing.
+* Monerva backend catches the exception and **automatically falls back to the Offline Mock Engine**. This keeps the application fully functional, returning mock categorizations, subscription predictions, and insights instead of crashing.
 
 ---
 
@@ -75,7 +75,7 @@ If the free tier traffic exceeds Gemini's rate limits (15 Requests Per Minute):
 AI capabilities are configured dynamically in the backend via environment variables. If you want to disable Gemini API entirely:
 
 1. **Switch to Mock Platform:**
-   Remove the `GEMINI_API_KEY` from the Render environment variables, or set `AI_PROVIDER=mock`. Finova will route all insights, transaction categorizations, and chat coaching to the offline mock calculation engine.
+   Remove the `GEMINI_API_KEY` from the Render environment variables, or set `AI_PROVIDER=mock`. Monerva will route all insights, transaction categorizations, and chat coaching to the offline mock calculation engine.
 
 2. **Custom Providers:**
    You can also configure `AI_PROVIDER` to `openai` (requires `OPENAI_API_KEY`), `anthropic` (requires `ANTHROPIC_API_KEY`), or `ollama` (local offline provider) in the server environment variables.

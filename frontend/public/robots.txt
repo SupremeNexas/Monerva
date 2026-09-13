@@ -16,4 +16,4 @@ Disallow: /copilot
 Disallow: /assistant
 Disallow: /workspace-settings
 
-Sitemap: https://finova.example.com/sitemap.xml
+Sitemap: https://monerva.example.com/sitemap.xml

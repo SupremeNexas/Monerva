@@ -28,14 +28,14 @@ export default function AIDisclaimerPage() {
           <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl flex items-start gap-3 text-amber-200 text-xs">
             <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
             <div>
-              <strong>No Licensed Financial Advice:</strong> Finova and its AI services provide automated data organization, calculation, and document retrieval. Finova is <strong>NOT</strong> a certified financial planner, tax advisor, or investment professional. AI outputs do not constitute formal financial, tax, or legal advice.
+              <strong>No Licensed Financial Advice:</strong> Monerva and its AI services provide automated data organization, calculation, and document retrieval. Monerva is <strong>NOT</strong> a certified financial planner, tax advisor, or investment professional. AI outputs do not constitute formal financial, tax, or legal advice.
             </div>
           </div>
 
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white uppercase tracking-wider">1. AI Receipt & Bill OCR Scanning</h2>
             <p>
-              Finova utilizes multimodal artificial intelligence models (Google Gemini Vision) to parse uploaded receipt images and extract draft transaction fields (merchant name, date, total amount, tax, items, and category).
+              Monerva utilizes multimodal artificial intelligence models (Google Gemini Vision) to parse uploaded receipt images and extract draft transaction fields (merchant name, date, total amount, tax, items, and category).
             </p>
             <ul className="list-disc list-inside space-y-1.5 text-slate-300 pl-2">
               <li><strong>OCR Verification Requirement:</strong> AI extraction is an automated convenience feature and is not guaranteed to be 100% accurate. Image quality, lighting, handwriting, or damaged receipts can affect OCR results.</li>
@@ -57,7 +57,7 @@ export default function AIDisclaimerPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white uppercase tracking-wider">3. Financial Assistant Insights & Calculations</h2>
             <p>
-              Finova's AI Assistant performs database analytics over your recorded expenses and income. All totals, category spending percentages, and budget comparisons are derived directly from your transaction database using exact mathematical queries. The AI Assistant generates narrative summaries to explain your financial patterns.
+              Monerva's AI Assistant performs database analytics over your recorded expenses and income. All totals, category spending percentages, and budget comparisons are derived directly from your transaction database using exact mathematical queries. The AI Assistant generates narrative summaries to explain your financial patterns.
             </p>
           </section>
 
@@ -71,7 +71,7 @@ export default function AIDisclaimerPage() {
         </main>
 
         <footer className="mt-8 text-center text-xs text-slate-500">
-          Last revised: September 2026. Version 1.0. Finova Intelligence Group.
+          Last revised: September 2026. Version 1.0. Monerva Intelligence Group.
         </footer>
       </div>
     </div>

@@ -4,6 +4,13 @@ import useAuthStore from './store/authStore';
 import { Layout } from './components/Layout/Layout';
 import { ToastProvider } from './components/UI/Toast';
 import { SmoothScroll } from './components/UI/SmoothScroll';
+import { initAnalytics } from './services/analytics';
+import { useAnalyticsPageTracking } from './hooks/useAnalyticsPageTracking';
+
+function RouteTracker() {
+  useAnalyticsPageTracking();
+  return null;
+}
 
 // Lazy-load all page components — each becomes its own JS chunk at build time
 const LandingPage       = React.lazy(() => import('./pages/LandingPage'));
@@ -154,8 +161,13 @@ function AppRoutes() {
 }
 
 function App() {
+  useEffect(() => {
+    initAnalytics();
+  }, []);
+
   return (
     <Router>
+      <RouteTracker />
       <ToastProvider>
         <SmoothScroll>
           <AppRoutes />

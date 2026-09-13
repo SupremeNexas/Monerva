@@ -71,7 +71,7 @@ export default function AnalyticsPage() {
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `Expense_Tracker_${year}_${month}.csv`);
+      link.setAttribute("download", `Monerva_${year}_${month}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

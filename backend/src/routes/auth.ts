@@ -4,6 +4,7 @@ import * as jwt from 'jsonwebtoken';
 import rateLimit from 'express-rate-limit';
 import { body } from 'express-validator';
 import { validate } from '../middleware/validation';
+import { requireTurnstile } from '../middleware/turnstile';
 import { OAuth2Client } from 'google-auth-library';
 import { prisma } from '../db/prisma';
 import { authenticate, AuthenticatedRequest, getJwtSecret } from '../middleware/auth';
@@ -36,7 +37,7 @@ const generateTokens = (user: { id: string; email: string }) => {
 };
 
 // ─── POST /register ──────────────────────────────────────────────────────────
-router.post('/register', authLimiter, [
+router.post('/register', authLimiter, requireTurnstile, [
   body('name').trim().notEmpty().withMessage('Name is required'),
   body('email').isEmail().withMessage('Valid email is required').normalizeEmail(),
   passwordRules
@@ -122,7 +123,7 @@ router.post('/register', authLimiter, [
 });
 
 // ─── POST /login ─────────────────────────────────────────────────────────────
-router.post('/login', authLimiter, [
+router.post('/login', authLimiter, requireTurnstile, [
   body('email').isEmail().withMessage('Valid email is required').normalizeEmail(),
   body('password').notEmpty().withMessage('Password is required')
 ], validate, async (req: any, res: Response) => {

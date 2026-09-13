@@ -1,4 +1,4 @@
-# Dockerfile for the Expense Tracker API
+# Dockerfile for the Monerva API
 
 # Use an official Node runtime as a parent image
 FROM node:20-alpine

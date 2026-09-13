@@ -65,7 +65,7 @@ export default function DashboardPage() {
     mutationFn: (data: { message: string; history: any[] }) => api.request('/ai/chat', { method: 'POST', body: data }),
     onSuccess: (data) => setChatHistory(prev => [...prev, { role: 'assistant', content: data.reply }]),
     onError: (err: any) => {
-      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Finova Pro')) {
+      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Monerva Pro')) {
         setShowPaywall(true);
       } else {
         showToast(err.message || 'SYS.ERROR', 'error');
@@ -511,7 +511,7 @@ export default function DashboardPage() {
       <PaywallModal
         isOpen={showPaywall}
         onClose={() => setShowPaywall(false)}
-        featureName="Finova Pro AI Features"
+        featureName="Monerva Pro AI Features"
       />
     </div>
   );

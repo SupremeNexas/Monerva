@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-Thank you for your interest in contributing to the **antigravity** Expense Tracker! We welcome contributions from developers of all skill levels.
+Thank you for your interest in contributing to **Monerva**! We welcome contributions from developers of all skill levels.
 
 ---
 

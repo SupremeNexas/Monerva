@@ -1,8 +1,8 @@
-# Project Overview: Expense Tracker
+# Project Overview: Monerva
 Last Updated: 2026-07-19
 
 ## 🎯 Product Purpose
-The Personal Finance and Expense Tracker (**antigravity**) is a web application designed to help users manage their finances. It features multi-account balance sheets, categories tracking, budgets enforcement, credit cards limits monitoring, recurring bills lists, savings goals, and shared split-expense group ledgers. It leverages AI models to automate entry via receipt photo uploads and provides contextual feedback.
+Monerva is a personal finance platform designed to help users manage their finances. It features multi-account balance sheets, categories tracking, budgets enforcement, credit cards limits monitoring, recurring bills lists, savings goals, and shared split-expense group ledgers. It leverages AI models to automate entry via receipt photo uploads and provides contextual feedback.
 
 ---
 

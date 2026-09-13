@@ -2,7 +2,7 @@
 
 **Last Updated:** September 13, 2026
 
-`[LEGAL_ENTITY_NAME_REQUIRED]` ("Company", "we", "us", or "our") respects your privacy and describes herein how personal data is handled within **Finova** (the "Service").
+`[LEGAL_ENTITY_NAME_REQUIRED]` ("Company", "we", "us", or "our") respects your privacy and describes herein how personal data is handled within **Monerva** (the "Service").
 
 ---
 
@@ -15,7 +15,7 @@
 - **Legal Consent Logs:** Consent timestamps (`termsAcceptedAt`) and terms version strings (`termsVersion`).
 
 #### 1.2 Information Stored in Browser Web Storage
-Finova uses browser `localStorage` to maintain application state:
+Monerva uses browser `localStorage` to maintain application state:
 - `fintech_token`: JWT bearer access token for API authorization.
 - `fintech_refresh_token`: Token string used to refresh access tokens upon expiration.
 - `fintech_workspace_id`: Active workspace preference selection.
@@ -25,7 +25,7 @@ Finova uses browser `localStorage` to maintain application state:
 Application hosting servers record standard operational log entries (including client IP address, user-agent header, and request path/timestamp) for security monitoring and runtime diagnostic purposes.
 
 #### 1.4 Credentials Not Collected
-Finova does not request, collect, or store:
+Monerva does not request, collect, or store:
 - Bank account passwords or netbanking PINs
 - Credit/debit card CVV codes or PINs
 - UPI PINs or One-Time Passwords (OTPs)
@@ -46,7 +46,7 @@ Collected information is processed for the following operational purposes:
 
 ### 3. Third-Party Data Processors Inventory
 
-The following external infrastructure and third-party service providers process data in connection with Finova:
+The following external infrastructure and third-party service providers process data in connection with Monerva:
 
 | Processor | Platform Role | Data Transmitted / Stored | Data Handling & Privacy Safeguards |
 | :--- | :--- | :--- | :--- |
@@ -60,10 +60,10 @@ The following external infrastructure and third-party service providers process 
 
 ### 4. Browser Local Storage Security Disclosures
 
-Finova uses browser `localStorage` rather than HTTP-only cookies for authentication session state. Items saved in `localStorage` can be read by JavaScript code executing within the application origin. To mitigate security risks:
+Monerva uses browser `localStorage` rather than HTTP-only cookies for authentication session state. Items saved in `localStorage` can be read by JavaScript code executing within the application origin. To mitigate security risks:
 - API communications require HTTPS/TLS encryption.
 - Tokens carry explicit expiration limits.
-- Users are advised to access Finova from secure devices and maintain updated web browser software.
+- Users are advised to access Monerva from secure devices and maintain updated web browser software.
 
 ---
 

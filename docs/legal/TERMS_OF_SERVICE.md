@@ -2,19 +2,19 @@
 
 **Last Updated:** September 13, 2026
 
-Welcome to **Finova**, a personal finance tracking and ledger platform operated by `[LEGAL_ENTITY_NAME_REQUIRED]` ("Company", "we", "us", or "our").
+Welcome to **Monerva**, a personal finance tracking and ledger platform operated by `[LEGAL_ENTITY_NAME_REQUIRED]` ("Company", "we", "us", or "our").
 
-By accessing or using Finova (the "Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, you may not access or use the Service.
+By accessing or using Monerva (the "Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, you may not access or use the Service.
 
 ---
 
 ### 1. Corporate Identity & Regulatory Disclaimers
 
-1.1 **Operating Entity:** Finova is operated by `[LEGAL_ENTITY_NAME_REQUIRED]`, having its registered address at `[REGISTERED_ADDRESS_REQUIRED]`.
+1.1 **Operating Entity:** Monerva is operated by `[LEGAL_ENTITY_NAME_REQUIRED]`, having its registered address at `[REGISTERED_ADDRESS_REQUIRED]`.
 
-1.2 **Non-Regulated Status:** Finova is an informational software utility designed solely for self-directed personal expense tracking, budgeting, and financial organization. Finova is not a bank, non-banking financial company (NBFC), payment gateway, payment aggregator, wealth management advisor, or regulated financial institution under applicable local laws.
+1.2 **Non-Regulated Status:** Monerva is an informational software utility designed solely for self-directed personal expense tracking, budgeting, and financial organization. Monerva is not a bank, non-banking financial company (NBFC), payment gateway, payment aggregator, wealth management advisor, or regulated financial institution under applicable local laws.
 
-1.3 **No Banking Credentials:** Finova does not connect directly to banking core systems, nor does it request, collect, process, or store sensitive payment or banking authentication credentials. You must not enter or upload:
+1.3 **No Banking Credentials:** Monerva does not connect directly to banking core systems, nor does it request, collect, process, or store sensitive payment or banking authentication credentials. You must not enter or upload:
 - Bank PINs or netbanking passwords
 - Credit card CVVs or expiration codes
 - UPI PINs or OTPs (One-Time Passwords)
@@ -34,11 +34,11 @@ By accessing or using Finova (the "Service"), you agree to be bound by these Ter
 
 ### 3. Financial Information & AI Features
 
-3.1 **Informational Use Only:** All summaries, charts, categorization suggestions, budget warnings, and AI-generated responses provided by Finova are for informational and organizational purposes only.
+3.1 **Informational Use Only:** All summaries, charts, categorization suggestions, budget warnings, and AI-generated responses provided by Monerva are for informational and organizational purposes only.
 
-3.2 **No Professional Advice:** Finova does not provide investment, tax, legal, or formal accounting advice. Users must consult qualified professional advisors before making financial or investment decisions based on Service outputs.
+3.2 **No Professional Advice:** Monerva does not provide investment, tax, legal, or formal accounting advice. Users must consult qualified professional advisors before making financial or investment decisions based on Service outputs.
 
-3.3 **AI Technology & Third-Party Processing:** Finova integrates third-party AI services, including Google Gemini API, to assist with document text extraction, receipt scanning, and context-aware responses. Input data provided to AI features (such as receipt images or text queries) is processed under Google's published Gemini API Terms governing the API tier configured by the platform operator.
+3.3 **AI Technology & Third-Party Processing:** Monerva integrates third-party AI services, including Google Gemini API, to assist with document text extraction, receipt scanning, and context-aware responses. Input data provided to AI features (such as receipt images or text queries) is processed under Google's published Gemini API Terms governing the API tier configured by the platform operator.
 
 ---
 

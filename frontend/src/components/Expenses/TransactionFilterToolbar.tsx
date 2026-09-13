@@ -16,6 +16,7 @@ import {
   ChevronDown
 } from 'lucide-react';
 import { Category, Wallet, TransactionFilters } from '../../types';
+import { trackEvent } from '../../services/analytics';
 
 interface TransactionFilterToolbarProps {
   filters: TransactionFilters;
@@ -46,6 +47,9 @@ export function TransactionFilterToolbar({
   useEffect(() => {
     const timer = setTimeout(() => {
       if (searchInput !== filters.search) {
+        if (searchInput.trim()) {
+          trackEvent('search_used', { search_length: searchInput.trim().length });
+        }
         onFilterChange({ search: searchInput, page: 1 });
       }
     }, 300);

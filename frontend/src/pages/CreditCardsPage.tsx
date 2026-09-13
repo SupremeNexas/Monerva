@@ -185,7 +185,7 @@ export default function CreditCardsPage() {
               <div className="relative w-[340px] h-[320px] sm:w-[480px] sm:h-[350px] mt-8 lg:mt-0 flex items-center justify-center">
                 <CardSwap
                   width={340}
-                  height={200}
+                  height={220}
                   cardDistance={45}
                   verticalDistance={45}
                   delay={4500}
@@ -200,12 +200,13 @@ export default function CreditCardsPage() {
                     // Retrieve stored details if present
                     const localDetails = localStorage.getItem(`card_details_${card.id}`);
                     const details = localDetails ? JSON.parse(localDetails) : null;
+                    const formattedCardNum = details?.cardNumber || `•••• •••• •••• ${card.id.substring(card.id.length - 4)}`;
 
                     return (
                       <SwapCard key={card.id} className="!p-0 !border-0 !bg-transparent !shadow-none">
                         <InteractiveCreditCard
                           cardName={card.name}
-                          cardNumber={details?.cardNumber || `•••• ​ •••• ​ •••• ​ ${card.id.substring(card.id.length - 4)}`}
+                          cardNumber={formattedCardNum}
                           limitAmount={limit}
                           totalDue={due}
                           dueDate={(card.days_until_due ?? 0).toString()}
@@ -224,7 +225,7 @@ export default function CreditCardsPage() {
           {/* Individual Account Detail Grid */}
           <div className="space-y-4">
             <h2 className="text-xl font-bold text-[#0b1c30]">Account Details & Limits</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6">
               {cards.map((card, index) => {
                 const limit = Number(card.limit_amount || 0);
                 const due = Number(card.total_due || 0);
@@ -245,13 +246,14 @@ export default function CreditCardsPage() {
                 // Retrieve stored details if present
                 const localDetails = localStorage.getItem(`card_details_${card.id}`);
                 const details = localDetails ? JSON.parse(localDetails) : null;
+                const formattedCardNum = details?.cardNumber || `•••• •••• •••• ${card.id.substring(card.id.length - 4)}`;
 
                 return (
-                  <div key={card.id} className="soft-card p-6 flex flex-col xl:flex-row gap-6 items-center">
+                  <div key={card.id} className="soft-card p-5 sm:p-6 flex flex-col md:flex-row gap-6 items-center md:items-start 2xl:items-center min-w-0 overflow-hidden">
                     <div className="flex-shrink-0 w-full md:w-auto flex justify-center">
                       <InteractiveCreditCard
                         cardName={card.name}
-                        cardNumber={details?.cardNumber || `•••• ​ •••• ​ •••• ​ ${card.id.substring(card.id.length - 4)}`}
+                        cardNumber={formattedCardNum}
                         limitAmount={limit}
                         totalDue={due}
                         dueDate={daysLeft.toString()}
@@ -261,42 +263,42 @@ export default function CreditCardsPage() {
                       />
                     </div>
 
-                    <div className="flex-1 w-full space-y-4">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="text-xl font-bold text-[#0b1c30]">{card.name}</h3>
-                          <span className={`text-[10px] font-bold px-2 py-0.5 border rounded uppercase tracking-wider ${riskColor}`}>
+                    <div className="flex-1 w-full min-w-0 space-y-4 pt-1">
+                      <div className="flex justify-between items-start gap-3">
+                        <div className="min-w-0 flex-1">
+                          <h3 className="text-xl font-bold text-[#0b1c30] truncate">{card.name}</h3>
+                          <span className={`inline-block mt-1 text-[10px] font-bold px-2 py-0.5 border rounded uppercase tracking-wider ${riskColor}`}>
                             {riskText}
                           </span>
                         </div>
                         <button
                           onClick={() => handleDelete(card.id, card.name)}
-                          className="p-1.5 rounded-lg hover:bg-red-50 text-red-500 cursor-pointer transition-colors"
+                          className="p-1.5 rounded-lg hover:bg-red-50 text-red-500 cursor-pointer transition-colors flex-shrink-0"
                           title="Remove card"
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4 border-t border-slate-100 pt-4">
-                        <div>
-                          <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">Due Amount</span>
-                          <span className="text-sm font-extrabold text-red-600">{formatCurrency(due, user?.baseCurrency)}</span>
+                      <div className="grid grid-cols-2 gap-3 sm:gap-4 border-t border-slate-100 pt-4">
+                        <div className="min-w-0">
+                          <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block truncate">Due Amount</span>
+                          <span className="text-sm font-extrabold text-red-600 block truncate">{formatCurrency(due, user?.baseCurrency)}</span>
                         </div>
-                        <div>
-                          <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">Min Bill</span>
-                          <span className="text-sm font-extrabold text-[#0b1c30]">{formatCurrency(Number(card.minimum_due || 0), user?.baseCurrency)}</span>
+                        <div className="min-w-0">
+                          <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block truncate">Min Bill</span>
+                          <span className="text-sm font-extrabold text-[#0b1c30] block truncate">{formatCurrency(Number(card.minimum_due || 0), user?.baseCurrency)}</span>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">Limit Available</span>
-                          <span className="text-sm font-extrabold text-emerald-600">{formatCurrency(limit - due, user?.baseCurrency)}</span>
+                      <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                        <div className="min-w-0">
+                          <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block truncate">Limit Available</span>
+                          <span className="text-sm font-extrabold text-emerald-600 block truncate">{formatCurrency(limit - due, user?.baseCurrency)}</span>
                         </div>
-                        <div>
-                          <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">Remaining Time</span>
-                          <span className={`text-sm font-extrabold ${daysLeft <= 5 ? 'text-red-500 font-black animate-pulse' : 'text-[#0b1c30]'}`}>
+                        <div className="min-w-0">
+                          <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block truncate">Remaining Time</span>
+                          <span className={`text-sm font-extrabold block truncate ${daysLeft <= 5 ? 'text-red-500 font-black animate-pulse' : 'text-[#0b1c30]'}`}>
                             {daysLeft} Days
                           </span>
                         </div>

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { User } from '../types';
 import { api, setToken } from '../api/client';
+import { trackEvent } from '../services/analytics';
 
 interface AuthState {
   user: User | null;
@@ -20,12 +21,18 @@ export const useAuthStore = create<AuthState>((set) => ({
   authLoading: true,
 
   login: async (credentials) => {
-    const res = await api.login(credentials);
-    setToken(res.token);
-    if (res.refreshToken) {
-      localStorage.setItem('fintech_refresh_token', res.refreshToken);
+    try {
+      const res = await api.login(credentials);
+      setToken(res.token);
+      if (res.refreshToken) {
+        localStorage.setItem('fintech_refresh_token', res.refreshToken);
+      }
+      set({ user: res.user });
+      trackEvent('login_success', { method: 'email' });
+    } catch (err: any) {
+      trackEvent('login_failed', { method: 'email', error_type: 'invalid_credentials' });
+      throw err;
     }
-    set({ user: res.user });
   },
 
   register: async (data) => {
@@ -35,6 +42,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       localStorage.setItem('fintech_refresh_token', res.refreshToken);
     }
     set({ user: res.user });
+    trackEvent('signup_completed', { method: 'email' });
   },
 
   // Accepts the Google ID Token (credential) returned by GSI
@@ -45,9 +53,11 @@ export const useAuthStore = create<AuthState>((set) => ({
       localStorage.setItem('fintech_refresh_token', res.refreshToken);
     }
     set({ user: res.user });
+    trackEvent('login_success', { method: 'google' });
   },
 
   logout: () => {
+    trackEvent('logout');
     setToken(null);
     localStorage.removeItem('fintech_refresh_token');
     // Revoke Google session so the picker appears fresh next login

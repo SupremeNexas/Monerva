@@ -1,7 +1,7 @@
 {
-  "name": "finova-backend",
+  "name": "monerva-backend",
   "version": "1.0.0",
-  "description": "Finova REST API with Express and PostgreSQL",
+  "description": "Monerva REST API with Express and PostgreSQL",
   "main": "server.ts",
   "scripts": {
     "start": "node dist/server.js",

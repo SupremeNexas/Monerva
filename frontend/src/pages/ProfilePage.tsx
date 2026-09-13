@@ -185,7 +185,7 @@ export default function ProfilePage() {
           <h3 className="font-bold text-slate-800 text-base">{formData.displayName || formData.name || 'User Profile'}</h3>
           <p className="text-xs text-gray-400 mt-1">{user.email}</p>
           <div className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500/15 to-indigo-500/15 border border-amber-500/30 text-amber-700">
-            <span>{user.plan === 'PRO' || user.email?.toLowerCase() === 'demo@example.com' ? '👑 Finova Pro' : 'Free Plan'}</span>
+            <span>{user.plan === 'PRO' || user.email?.toLowerCase() === 'demo@example.com' ? '👑 Monerva Pro' : 'Free Plan'}</span>
           </div>
 
           <div className="w-full mt-6 space-y-3 text-left">

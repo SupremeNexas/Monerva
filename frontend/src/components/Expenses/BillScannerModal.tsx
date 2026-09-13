@@ -32,6 +32,7 @@ import {
   Group,
   GroupDetails
 } from '../../types';
+import { trackEvent } from '../../services/analytics';
 
 interface BillScannerModalProps {
   isOpen: boolean;
@@ -174,9 +175,14 @@ export default function BillScannerModal({ isOpen, onClose }: BillScannerModalPr
     if (!selectedFile) return;
     if (!isPro) {
       setShowPaywall(true);
+      trackEvent('receipt_scan_failed', { error_type: 'paywall_required' });
       return;
     }
     setScanState('SCANNING'); setErrorMessage(null); setDuplicateConfirmed(false);
+    const startTime = Date.now();
+    const ext = selectedFile.name.split('.').pop()?.toLowerCase() || 'unknown';
+    trackEvent('receipt_scan_started', { file_format: ext });
+
     try {
       const formData = new FormData();
       formData.append('receipt', selectedFile);
@@ -197,18 +203,28 @@ export default function BillScannerModal({ isOpen, onClose }: BillScannerModalPr
         } else setCategoryId('');
         setScanState('REVIEW');
         showToast('Receipt scanned successfully! Review extracted data.', 'success');
+
+        const duration = Date.now() - startTime;
+        trackEvent('receipt_scan_completed', {
+          duration_ms: duration,
+          item_count: d.items?.length || 0,
+          has_duplicate_warning: Boolean(response.duplicateWarning?.possibleDuplicate),
+        });
       } else {
         setErrorMessage(response.error || 'Failed to analyze receipt image');
         setScanState('ERROR'); showToast(response.error || 'Failed to analyze receipt', 'error');
+        trackEvent('receipt_scan_failed', { error_type: 'server_error' });
       }
     } catch (err: any) {
-      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Finova Pro')) {
+      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Monerva Pro')) {
         setShowPaywall(true);
         setScanState('IDLE');
+        trackEvent('receipt_scan_failed', { error_type: 'paywall_required' });
         return;
       }
       const msg = err.message === 'UNAVAILABLE' ? 'Receipt scanning is temporarily unavailable.' : (err.message || 'Failed to connect');
       setErrorMessage(msg); setScanState('ERROR'); showToast(msg, 'error');
+      trackEvent('receipt_scan_failed', { error_type: 'server_error' });
     }
   };
 
@@ -247,6 +263,12 @@ export default function BillScannerModal({ isOpen, onClose }: BillScannerModalPr
         if (is) notesParts.push(`Scanned Items: ${is}`);
       }
       await api.createExpense({ title: merchant.trim(), amount: numAmt, category_id: categoryId, date: new Date(date).toISOString(), notes: notesParts.join(' | '), payment_method: paymentMethod || 'Card', wallet_id: walletId || undefined, type: 'EXPENSE', tags: ['scanned-receipt'] });
+      trackEvent('expense_created', {
+        source: 'receipt_scan',
+        has_category: Boolean(categoryId),
+        has_wallet: Boolean(walletId),
+        payment_method: paymentMethod || 'Card',
+      });
       showToast('Expense created successfully!', 'success');
       queryClient.invalidateQueries({ queryKey: ['expenses'] }); queryClient.invalidateQueries({ queryKey: ['summary'] });
       queryClient.invalidateQueries({ queryKey: ['trend'] }); queryClient.invalidateQueries({ queryKey: ['categories-pie'] });
@@ -367,6 +389,10 @@ export default function BillScannerModal({ isOpen, onClose }: BillScannerModalPr
         date: date ? new Date(date).toISOString() : new Date().toISOString(),
         paid_by_user_id: paidByUserId,
         splits
+      });
+      trackEvent('shared_expense_created', {
+        participant_count: selectedParticipantIds.length,
+        split_method: splitMethod,
       });
       showToast('Split expense created successfully!', 'success');
       queryClient.invalidateQueries({ queryKey: ['groups'] });

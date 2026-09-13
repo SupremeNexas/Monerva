@@ -1,6 +1,6 @@
 # Product Requirements Document: Database Layer
 
-**Product:** Expense Tracker — AI-native personal finance platform
+**Product:** Monerva — AI-native personal finance platform
 **Version:** 1.0
 **Last Updated:** 2026-08-05
 **Stack:** PostgreSQL 14+ · Prisma ORM 5.x · Node.js (Express)
@@ -9,7 +9,7 @@
 
 ## 1. Overview
 
-This document specifies the requirements for the database layer of the Expense Tracker. The database is the system of record for all financial data: user accounts, transactions, budgets, goals, subscriptions, credit cards, group expenses, and enterprise-grade features (workspaces, automations, audit logs).
+This document specifies the requirements for the database layer of Monerva. The database is the system of record for all financial data: user accounts, transactions, budgets, goals, subscriptions, credit cards, group expenses, and enterprise-grade features (workspaces, automations, audit logs).
 
 It defines **what** the data layer must store and guarantee — not the UI or API contract, which are covered in [APRD.md](APRD.md) and the API wiki.
 

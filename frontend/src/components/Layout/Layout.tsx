@@ -52,7 +52,7 @@ export function Layout({ children }: LayoutProps) {
         {location.pathname !== '/dashboard' && <TransactionMenu />}
 
         {/* Inner page content container */}
-        <main className="flex-1 px-6 pt-20 pb-12 overflow-y-auto" data-lenis-prevent>
+        <main className="flex-1 px-6 pt-20 pb-12">
           {children}
         </main>
       </div>

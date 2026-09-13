@@ -2,7 +2,7 @@
 
 **Last Updated:** September 13, 2026
 
-`[LEGAL_ENTITY_NAME_REQUIRED]` ("Company", "we", "us") describes herein data deletion mechanisms and retention distinctions for **Finova**.
+`[LEGAL_ENTITY_NAME_REQUIRED]` ("Company", "we", "us") describes herein data deletion mechanisms and retention distinctions for **Monerva**.
 
 ---
 

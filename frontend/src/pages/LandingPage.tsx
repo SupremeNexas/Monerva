@@ -364,7 +364,7 @@ export default function LandingPage() {
   return (
     <div ref={containerRef} className="site-shell-cinematic">
       <main className="site-shell">
-        <section className="cinema-scroll" id="cinema" aria-label="Finova cinematic scroll story">
+        <section className="cinema-scroll" id="cinema" aria-label="Monerva cinematic scroll story">
           <div className="stage">
             <div className="world">
               {/* Sky Background */}
@@ -377,7 +377,7 @@ export default function LandingPage() {
               {/* Site Header */}
               <header className="site-header" aria-label="Primary navigation">
                 <a className="site-logo" href="#cinema" onClick={(e) => handleNavClick(e, 0)}>
-                  finova
+                  monerva
                 </a>
                 <nav className="site-nav" aria-label="Main menu">
                   <a href="#cinema" onClick={(e) => handleNavClick(e, 0)}>Intro</a>
@@ -410,7 +410,7 @@ export default function LandingPage() {
               </div>
 
               {/* Sights Slider - Dual Row Opposing Scroll */}
-              <section className="sights-slider" aria-label="Finova features slider">
+              <section className="sights-slider" aria-label="Monerva features slider">
                 {/* Row 1 (scrolls standard direction) */}
                 <div
                   ref={trackRef}
@@ -478,7 +478,7 @@ export default function LandingPage() {
               </section>
 
               {/* Hero Title */}
-              <h1 className="hero-title">Finova</h1>
+              <h1 className="hero-title">Monerva</h1>
 
               {/* Split Frame Midground */}
               <img
@@ -509,7 +509,7 @@ export default function LandingPage() {
             </div>
 
             {/* Cinematic Scroll Overlays */}
-            <section className="intro-copy" aria-label="Finova overview">
+            <section className="intro-copy" aria-label="Monerva overview">
               <p>
                 A simple ledger, smart categories, and a secure vault made for clean accounting, quick scanning, and one complete financial view.
               </p>
@@ -533,7 +533,7 @@ export default function LandingPage() {
             <section className="story-panel story-panel-bridge" aria-label="Ledger details">
               <h2>The ledger is your compass.</h2>
               <p>
-                Finova links all your credit cards, banks, and cash accounts into a single database shaped by double-entry precision and compliance.
+                Monerva links all your credit cards, banks, and cash accounts into a single database shaped by double-entry precision and compliance.
               </p>
               <dl className="facts">
                 <div>
@@ -554,7 +554,7 @@ export default function LandingPage() {
                 Real-time charts, category limits, pending bills, and active subscriptions stay within a single glance of your ledger.
               </p>
               <button className="note-button" onClick={() => navigate('/auth')}>
-                <span>Open Finova</span>
+                <span>Open Monerva</span>
               </button>
             </section>
           </div>
@@ -647,7 +647,7 @@ export default function LandingPage() {
                     a: "We implement standard HTTPS transport encryption, user authentication, and database tenant isolation to safeguard user accounts."
                   },
                   {
-                    q: "Does Finova support multiple currencies?",
+                    q: "Does Monerva support multiple currencies?",
                     a: "We support over 150 currencies with automated live mid-market exchange rate conversions."
                   },
                   {
@@ -721,7 +721,7 @@ export default function LandingPage() {
             <div className="col-span-2 flex flex-col justify-between">
               <div>
                 <a className="font-serif text-2xl font-normal text-white uppercase tracking-wider" style={{ fontFamily: "'Ogg Medium', Georgia, serif" }} href="#cinema" onClick={(e) => handleNavClick(e, 0)}>
-                  Finova Ltd
+                  Monerva Ltd
                 </a>
                 <p className="text-xs text-slate-500 mt-2 max-w-sm">Secure SaaS accounting ledgers designed with absolute logical isolation.</p>
               </div>

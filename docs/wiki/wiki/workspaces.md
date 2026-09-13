@@ -2,7 +2,7 @@
 
 Last Updated: 2026-07-19
 
-This wiki page outlines the multi-tenant architecture, role permission tiers, and collaborative ledger systems in the Expense Tracker.
+This wiki page outlines the multi-tenant architecture, role permission tiers, and collaborative ledger systems in Monerva.
 
 ---
 

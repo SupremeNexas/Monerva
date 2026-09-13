@@ -28,14 +28,14 @@ export default function TermsPage() {
           <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-start gap-3 text-emerald-200 text-xs">
             <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
             <div>
-              <strong>Important Notice & Service Scope:</strong> Finova is a personal financial ledger and information management software tool. Finova is <strong>NOT</strong> a bank, non-banking financial company (NBFC), payment system operator, money transmitter, or licensed financial advisor. Finova does not hold customer funds, execute money transfers, or provide professional investment advice.
+              <strong>Important Notice & Service Scope:</strong> Monerva is a personal financial ledger and information management software tool. Monerva is <strong>NOT</strong> a bank, non-banking financial company (NBFC), payment system operator, money transmitter, or licensed financial advisor. Monerva does not hold customer funds, execute money transfers, or provide professional investment advice.
             </div>
           </div>
 
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white uppercase tracking-wider">1. Agreement to Terms</h2>
             <p>
-              By registering an account, accessing, or using Finova (operated under configuration by [LEGAL_ENTITY_NAME_REQUIRED]), you agree to be bound by these Terms of Service, our <Link to="/privacy" className="text-emerald-400 underline">Privacy Policy</Link>, <Link to="/acceptable-use" className="text-emerald-400 underline">Acceptable Use Policy</Link>, and <Link to="/ai-disclaimer" className="text-emerald-400 underline">AI Disclaimer</Link>. If you do not agree to these terms, you must not use the application.
+              By registering an account, accessing, or using Monerva (operated under configuration by [LEGAL_ENTITY_NAME_REQUIRED]), you agree to be bound by these Terms of Service, our <Link to="/privacy" className="text-emerald-400 underline">Privacy Policy</Link>, <Link to="/acceptable-use" className="text-emerald-400 underline">Acceptable Use Policy</Link>, and <Link to="/ai-disclaimer" className="text-emerald-400 underline">AI Disclaimer</Link>. If you do not agree to these terms, you must not use the application.
             </p>
           </section>
 
@@ -49,14 +49,14 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white uppercase tracking-wider">3. Record-Keeping vs Monetary Settlement</h2>
             <p>
-              Finova provides manual and automated record-keeping features, including transaction logging, budget tracking, subscription alerts, friend debt calculations, group expense splitting, and receipt scanning. All calculations and balances displayed within Finova are for information tracking purposes only. Finova does not process payment transactions or transfer funds between accounts or users. Actual debt settlements must be executed independently outside the software.
+              Monerva provides manual and automated record-keeping features, including transaction logging, budget tracking, subscription alerts, friend debt calculations, group expense splitting, and receipt scanning. All calculations and balances displayed within Monerva are for information tracking purposes only. Monerva does not process payment transactions or transfer funds between accounts or users. Actual debt settlements must be executed independently outside the software.
             </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white uppercase tracking-wider">4. Artificial Intelligence & Document RAG Services</h2>
             <p>
-              Finova incorporates AI features, including receipt OCR processing (via Google Gemini Vision) and Financial Document Vault retrieval (via local text embeddings and Gemini text generation).
+              Monerva incorporates AI features, including receipt OCR processing (via Google Gemini Vision) and Financial Document Vault retrieval (via local text embeddings and Gemini text generation).
             </p>
             <ul className="list-disc list-inside space-y-1 text-slate-300 pl-2">
               <li><strong>OCR & Scanning Accuracy:</strong> AI-extracted values from receipts or bills are automated suggestions and may contain errors. You are strictly required to verify merchant names, dates, taxes, and amounts before saving transactions.</li>
@@ -68,7 +68,7 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white uppercase tracking-wider">5. Prohibited Financial Secrets</h2>
             <p>
-              You must <strong>NEVER</strong> input, upload, or transmit sensitive authentication credentials into Finova, including: bank passwords, netbanking PINs, UPI PINs, credit/debit card PINs, CVV/CVC numbers, OTPs, seed phrases, private keys, or national identity authentication secrets (e.g. Aadhaar OTP/PAN credentials). Finova will never request or store these secrets.
+              You must <strong>NEVER</strong> input, upload, or transmit sensitive authentication credentials into Monerva, including: bank passwords, netbanking PINs, UPI PINs, credit/debit card PINs, CVV/CVC numbers, OTPs, seed phrases, private keys, or national identity authentication secrets (e.g. Aadhaar OTP/PAN credentials). Monerva will never request or store these secrets.
             </p>
           </section>
 
@@ -82,7 +82,7 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white uppercase tracking-wider">7. Limitation of Liability</h2>
             <p>
-              To the maximum extent permitted by applicable law, Finova and its operators shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, arising out of your access to or use of the application, AI-generated outputs, or manual data inputs.
+              To the maximum extent permitted by applicable law, Monerva and its operators shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, arising out of your access to or use of the application, AI-generated outputs, or manual data inputs.
             </p>
           </section>
 
@@ -102,7 +102,7 @@ export default function TermsPage() {
               <p>Legal Entity: [LEGAL_ENTITY_NAME_REQUIRED]</p>
               <p>Address: [REGISTERED_ADDRESS_REQUIRED]</p>
               <p>Grievance Officer: [GRIEVANCE_OFFICER_NAME_REQUIRED]</p>
-              <p>Contact Email: grievance@finova.app</p>
+              <p>Contact Email: grievance@monerva.app</p>
             </div>
           </section>
         </main>

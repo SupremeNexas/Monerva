@@ -14,7 +14,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://fintech-finova-backend.onrender.com/api/$1"
+      "dest": "https://fintech-monerva-backend.onrender.com/api/$1"
     },
     {
       "handle": "filesystem"

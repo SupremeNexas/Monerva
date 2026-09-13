@@ -1,8 +1,8 @@
-# Expense Tracker Chat Summary
+# Monerva Chat Summary
 
 ## Overview
 
-This conversation focused on turning the Expense Tracker into a more polished, production-ready, and AI-native project. The main themes were improving the README, adding structured AI documentation, fixing production and deployment issues, refining the product experience, and planning an AI-first architecture for future development.
+This conversation focused on turning Monerva into a more polished, production-ready, and AI-native project. The main themes were improving the README, adding structured AI documentation, fixing production and deployment issues, refining the product experience, and planning an AI-first architecture for future development.
 
 ## README Rewrite
 

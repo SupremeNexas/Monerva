@@ -1,6 +1,6 @@
 # Product Roadmap
 
-This document outlines completed milestones and upcoming product features for the **antigravity** Expense Tracker platform.
+This document outlines completed milestones and upcoming product features for the Monerva platform.
 
 ---
 

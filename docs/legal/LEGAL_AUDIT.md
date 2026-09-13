@@ -8,7 +8,7 @@
 
 ### Executive Summary
 
-A factual and legal verification audit was performed on **Finova** to verify that all statements in `docs/legal/` align with actual backend/frontend code, database schemas, deployment configurations, and third-party API policies.
+A factual and legal verification audit was performed on **Monerva** to verify that all statements in `docs/legal/` align with actual backend/frontend code, database schemas, deployment configurations, and third-party API policies.
 
 While technical features—including atomic account deletion across 15+ relations, consent schema logging (`termsAcceptedAt`, `termsVersion`), local vector embedding generation (`@xenova/transformers`), prompt injection scrubbing, and tenant isolation—are implemented and verified by test suites, **public launch must remain conditionally blocked** until required corporate entity details (`[LEGAL_ENTITY_NAME_REQUIRED]`) and formal legal counsel reviews are completed.
 

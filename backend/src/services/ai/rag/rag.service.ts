@@ -74,7 +74,7 @@ RESPONSE RULES:
 4. Keep the answer clear, structured, and easy to read.
 `;
 
-    const systemInstruction = `You are Finova AI Document Assistant. You analyze user-uploaded financial documents such as loan agreements, tax forms, insurance policies, and investment reports. You strictly answer based on provided document context without hallucinating.`;
+    const systemInstruction = `You are Monerva AI Document Assistant. You analyze user-uploaded financial documents such as loan agreements, tax forms, insurance policies, and investment reports. You strictly answer based on provided document context without hallucinating.`;
 
     const provider = getTextAIProvider();
     const rawAnswer = await provider.generateText(prompt, systemInstruction);

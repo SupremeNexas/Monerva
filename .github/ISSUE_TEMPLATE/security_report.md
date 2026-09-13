@@ -9,7 +9,7 @@ assignees: ''
 
 > [!WARNING]
 > If you have identified a critical security vulnerability, do NOT open a public GitHub issue. 
-> Please read our [SECURITY.md](file:///Users/supryo/Desktop/Expense-Tracker/SECURITY.md) guidelines first on how to report privately.
+> Please read our [SECURITY.md](SECURITY.md) guidelines first on how to report privately.
 
 **Vulnerability Description**
 Provide a detailed explanation of the vulnerability.

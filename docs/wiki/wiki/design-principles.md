@@ -2,7 +2,7 @@
 
 Last Updated: 2026-07-19
 
-This document records the visual philosophies and UX conventions followed during the Phase 2 polish of the Expense Tracker codebase.
+This document records the visual philosophies and UX conventions followed during the Phase 2 polish of the Monerva codebase.
 
 ---
 

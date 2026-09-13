@@ -1,12 +1,12 @@
 # Agentic Product Requirements Document (APRD)
 Last Updated: 2026-07-19
 
-This document details the functional specifications, model integrations, prompt constraints, and fallback architectures for all AI capabilities in the **antigravity** Expense Tracker.
+This document details the functional specifications, model integrations, prompt constraints, and fallback architectures for all AI capabilities in Monerva.
 
 ---
 
 ## 🎯 AI System Overview
-The Expense Tracker leverages Large Language Models (LLMs) and Vision Models to deliver a frictionless personal finance experience. The goal is to:
+Monerva leverages Large Language Models (LLMs) and Vision Models to deliver a frictionless personal finance experience. The goal is to:
 1. Eliminate manual transaction data entry via automated receipt parsing.
 2. Provide context-aware, proactive financial advice through an interactive chat advisor drawer.
 3. Establish a standard, context-efficient workspace that allows AI coding assistants to interact with the repository with minimal token usage.

@@ -1,4 +1,4 @@
-# Finova System Security & Architecture Audit Report
+# Monerva System Security & Architecture Audit Report
 
 **Audit Date:** September 13, 2026  
 **Auditor:** Application Security & Infrastructure Audit Team  
@@ -11,7 +11,7 @@
 
 **RELEASE RECOMMENDATION:** <span style="color:green; font-weight:bold;">GO</span>
 
-Finova has completed a full security audit across authentication lifecycle, multi-tenant isolation, prompt injection defense, document vault processing, input validation, and marketing copy sanitization. All high and medium severity vulnerabilities identified during auditing have been remediated and verified through automated test suites.
+Monerva has completed a full security audit across authentication lifecycle, multi-tenant isolation, prompt injection defense, document vault processing, input validation, and marketing copy sanitization. All high and medium severity vulnerabilities identified during auditing have been remediated and verified through automated test suites.
 
 ---
 
@@ -64,17 +64,17 @@ Earlier UI components contained exaggerated or misleading security statements (e
 - **Frontend Test Suite:** 28 tests passed across 6 suites (`DashboardPage`, `ExpensesPage`, `ProfilePage`, `ProfileSetupPage`, `CSVImportModal`, `FinancialAlertsBanner`).
 
 ```
-▶ Finova Production Security & Legal Audit Test Suite
+▶ Monerva Production Security & Legal Audit Test Suite
   ✔ 1. LEGAL & CONSENT TRACKING: Records terms acceptance timestamp and version on user creation
   ✔ 2. TENANT ISOLATION: User B cannot access User A transaction or document records
   ✔ 3. PROMPT INJECTION & SAFETY SANITIZATION: Neutralizes malicious prompt overrides
   ✔ 4. INPUT VALIDATION: Rejects invalid transaction amounts and malformed payloads
   ✔ 5. CASCADING ACCOUNT ERASURE: Atomic transaction purges all user data across all tables
-✔ Finova Production Security & Legal Audit Test Suite (55ms)
+✔ Monerva Production Security & Legal Audit Test Suite (55ms)
 ```
 
 ---
 
 ## Final Security Conclusion
 
-Finova meets production application security standards for SaaS financial accounting and document retrieval. System architecture is secured against IDOR, multi-tenant leaks, prompt injection, and unauthorized data retention.
+Monerva meets production application security standards for SaaS financial accounting and document retrieval. System architecture is secured against IDOR, multi-tenant leaks, prompt injection, and unauthorized data retention.

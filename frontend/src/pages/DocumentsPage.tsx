@@ -10,6 +10,7 @@ import { useToast } from '../components/UI/Toast';
 import { PaywallModal } from '../components/UI/PaywallModal';
 import useAuthStore from '../store/authStore';
 import { DocumentItem, RAGAnswerResult, RAGSourceCitation } from '../types';
+import { trackEvent, getLengthBucket } from '../services/analytics';
 
 export default function DocumentsPage() {
   const { showToast } = useToast();
@@ -42,18 +43,28 @@ export default function DocumentsPage() {
   // Upload mutation
   const uploadMutation = useMutation({
     mutationFn: (file: File) => {
+      const sizeMb = Math.round((file.size / (1024 * 1024)) * 100) / 100;
+      trackEvent('document_upload_started', { file_size_mb: sizeMb });
       const formData = new FormData();
       formData.append('document', file);
       return api.uploadDocument(formData);
     },
-    onSuccess: (res) => {
+    onSuccess: (res, variables) => {
+      const sizeMb = Math.round((variables.size / (1024 * 1024)) * 100) / 100;
+      trackEvent('document_upload_completed', { file_size_mb: sizeMb });
+      trackEvent('document_indexed', {
+        chunk_count: res.document?.chunkCount || 1,
+        duration_ms: 500,
+      });
       showToast(`Document "${res.document?.originalFilename || 'PDF'}" uploaded and processing!`, 'success');
       queryClient.invalidateQueries({ queryKey: ['documents'] });
     },
     onError: (err: any) => {
-      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Finova Pro')) {
+      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Monerva Pro')) {
         setShowPaywall(true);
+        trackEvent('document_index_failed', { error_type: 'paywall_required' });
       } else {
+        trackEvent('document_index_failed', { error_type: 'server_error' });
         showToast(err.message || 'Failed to upload document', 'error');
       }
     }
@@ -74,14 +85,27 @@ export default function DocumentsPage() {
 
   // RAG direct query mutation
   const ragMutation = useMutation({
-    mutationFn: (query: string) => api.queryDocuments(query),
+    mutationFn: (query: string) => {
+      trackEvent('rag_question_asked', { query_length_bucket: getLengthBucket(query) });
+      return api.queryDocuments(query);
+    },
     onSuccess: (res: RAGAnswerResult) => {
       setRagResult(res);
+      if (res.chunksFound === 0) {
+        trackEvent('rag_no_answer', { reason: 'no_chunks_found' });
+      } else {
+        trackEvent('rag_answer_returned', {
+          chunks_matched: res.chunksFound || 0,
+          has_sources: (res.sources?.length || 0) > 0,
+          source_count: res.sources?.length || 0,
+        });
+      }
     },
     onError: (err: any) => {
-      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Finova Pro')) {
+      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Monerva Pro')) {
         setShowPaywall(true);
       } else {
+        trackEvent('rag_no_answer', { reason: 'error' });
         showToast(err.message || 'Failed to search document context', 'error');
       }
     }
@@ -366,7 +390,7 @@ export default function DocumentsPage() {
             </div>
 
             <p className="text-xs text-muted">
-              Ask any question across your uploaded PDF agreements or tax forms. Finova grounds its answers strictly in your vector embeddings with zero hallucinations.
+              Ask any question across your uploaded PDF agreements or tax forms. Monerva grounds its answers strictly in your vector embeddings with zero hallucinations.
             </p>
 
             {/* Quick Sample Prompts */}

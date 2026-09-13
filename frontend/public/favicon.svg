@@ -12,10 +12,10 @@
   <!-- Background Circle Glow -->
   <circle cx="256" cy="256" r="220" stroke="url(#logo-grad)" stroke-width="16" fill="none" opacity="0.9" filter="url(#glow)"/>
 
-  <!-- Stylized F Logo inside the circle -->
+  <!-- Stylized M Logo inside the circle -->
   <g fill="url(#logo-grad)">
-    <rect x="160" y="120" width="50" height="272" rx="20" />
-    <rect x="225" y="120" width="140" height="55" rx="20" />
-    <rect x="225" y="225" width="95" height="55" rx="20" />
+    <rect x="135" y="120" width="50" height="272" rx="20" />
+    <rect x="327" y="120" width="50" height="272" rx="20" />
+    <path d="M 160 145 L 256 325 L 352 145 L 327 125 L 256 255 L 185 125 Z" />
   </g>
 </svg>

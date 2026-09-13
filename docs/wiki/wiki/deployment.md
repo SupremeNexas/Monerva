@@ -1,7 +1,7 @@
 # Deployment Guide
 Last Updated: 2026-08-24
 
-This document details the configuration for local PostgreSQL database setups and production hosting configurations (Supabase PostgreSQL, Render backend, Vercel frontend) for **Finova**.
+This document details the configuration for local PostgreSQL database setups and production hosting configurations (Supabase PostgreSQL, Render backend, Vercel frontend) for **Monerva**.
 
 ---
 
@@ -23,7 +23,7 @@ For local developer setups, database engines are containerized using a dedicated
 ```
                             ┌─────────────────────┐
                             │  Vercel Frontend    │
-                            │  (finova.vercel.app) │
+                            │  (monerva.vercel.app)│
                             └──────────┬──────────┘
                                        │ (API Requests proxied)
                                        ▼ (/api/*)
@@ -67,7 +67,7 @@ Render builds the backend using the root-level configuration `render.yaml` confi
 
 ### Services Defined:
 * **Type**: Web Service
-* **Name**: `fintech-finova-backend`
+* **Name**: `fintech-monerva-backend`
 * **Runtime**: Node
 * **Build Command**: `cd backend && npm install && npx prisma generate && npx tsc`
 * **Start Command**: `cd backend && npm run start`
@@ -93,13 +93,13 @@ Vercel hosts the compiled Vite / React application.
 * **API Proxy**: Frontend API calls utilize relative paths (`/api/*`). The routing rules are declared in `frontend/vercel.json` and proxy all `/api` traffic directly to Render:
   ```json
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://fintech-finova-backend.onrender.com/api/$1" },
+    { "source": "/api/(.*)", "destination": "https://fintech-monerva-backend.onrender.com/api/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
 ```
 
-*Note: If Render has assigned a different URL to your backend (e.g. if the slot `fintech-finova-backend` was taken), you must update the Vercel rewrite destination in `frontend/vercel.json` to match the exact URL, then commit and push to GitHub.*
+*Note: If Render has assigned a different URL to your backend (e.g. if the slot `fintech-monerva-backend` was taken), you must update the Vercel rewrite destination in `frontend/vercel.json` to match the exact URL, then commit and push to GitHub.*
 
 ---
 

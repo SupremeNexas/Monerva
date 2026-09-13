@@ -68,7 +68,7 @@ export function InteractiveCreditCard({
           transformStyle: 'preserve-3d',
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-        className={`relative w-full h-56 rounded-2xl p-6 bg-gradient-to-br ${gradientFrom} ${gradientTo} border border-white/20 shadow-2xl overflow-hidden flex flex-col justify-between`}
+        className={`relative w-full min-h-[210px] sm:min-h-[220px] rounded-2xl p-5 sm:p-6 bg-gradient-to-br ${gradientFrom} ${gradientTo} border border-white/20 shadow-2xl overflow-hidden flex flex-col justify-between`}
         style={{ transformStyle: 'preserve-3d' }}
       >
         {/* Parallax Hologram & Background Texture */}
@@ -87,46 +87,46 @@ export function InteractiveCreditCard({
         />
 
         {/* Card Header & Contactless Icon */}
-        <div className="flex justify-between items-start relative z-10" style={{ transform: 'translateZ(20px)' }}>
-          <div>
-            <span className="text-xs uppercase tracking-[0.2em] font-extrabold text-indigo-300 block mb-0.5">
+        <div className="flex justify-between items-start relative z-10 gap-2" style={{ transform: 'translateZ(20px)' }}>
+          <div className="min-w-0 flex-1">
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-extrabold text-indigo-300 block mb-0.5 truncate">
               PRO ACCOUNT // TIER 1
             </span>
-            <span className="text-lg font-bold text-white tracking-tight drop-shadow">
+            <span className="text-base sm:text-lg font-bold text-white tracking-tight drop-shadow block truncate">
               {cardName}
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            <Wifi className="w-6 h-6 text-white/80 rotate-90 drop-shadow" />
-            <Sparkles className="w-5 h-5 text-amber-400" />
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <Wifi className="w-5 h-5 sm:w-6 sm:h-6 text-white/80 rotate-90 drop-shadow" />
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />
           </div>
         </div>
 
         {/* Chip & Number */}
-        <div className="my-2 relative z-10" style={{ transform: 'translateZ(30px)' }}>
-          <div className="w-12 h-9 rounded-md bg-gradient-to-br from-amber-200 via-yellow-400 to-amber-500 mb-4 border border-yellow-600/50 shadow-md flex items-center justify-between px-1">
+        <div className="my-1.5 sm:my-2 relative z-10" style={{ transform: 'translateZ(30px)' }}>
+          <div className="w-10 h-7 sm:w-12 sm:h-8.5 rounded-md bg-gradient-to-br from-amber-200 via-yellow-400 to-amber-500 mb-2 sm:mb-3 border border-yellow-600/50 shadow-md flex items-center justify-between px-1">
             <div className="w-full h-px bg-yellow-700/40" />
           </div>
-          <div className="text-xl font-mono tracking-[0.25em] text-white/95 font-semibold drop-shadow-md">
+          <div className="text-base sm:text-lg md:text-xl font-mono tracking-[0.14em] sm:tracking-[0.18em] text-white/95 font-semibold drop-shadow-md whitespace-nowrap overflow-hidden text-ellipsis">
             {cardNumber}
           </div>
         </div>
 
         {/* Card Footer */}
-        <div className="flex justify-between items-end relative z-10" style={{ transform: 'translateZ(25px)' }}>
-          <div>
+        <div className="flex justify-between items-end relative z-10 pt-1" style={{ transform: 'translateZ(25px)' }}>
+          <div className="flex-1 min-w-0 mr-3">
             <div className="text-[9px] uppercase tracking-widest text-slate-300 mb-0.5 font-bold">
               CARDHOLDER
             </div>
-            <div className="text-sm font-semibold tracking-wider text-white font-sans uppercase truncate max-w-[170px]">
+            <div className="text-xs sm:text-sm font-semibold tracking-wider text-white font-sans uppercase truncate">
               {cardHolder}
             </div>
           </div>
-          <div className="text-right">
+          <div className="text-right flex-shrink-0">
             <div className="text-[9px] uppercase tracking-widest text-slate-300 mb-0.5 font-bold">
               USAGE LIMIT
             </div>
-            <div className="text-sm font-bold tracking-wider text-emerald-400">
+            <div className="text-xs sm:text-sm font-bold tracking-wider text-emerald-400">
               {percentageUsed}%
             </div>
           </div>

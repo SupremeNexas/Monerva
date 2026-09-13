@@ -15,7 +15,7 @@ interface PaywallModalProps {
 export function PaywallModal({
   isOpen,
   onClose,
-  title = "Unlock Finova Pro Intelligence",
+  title = "Unlock Monerva Pro Intelligence",
   description = "Get unlimited access to AI insights, receipt scanning, spending forecasts, and personal financial coaching.",
   featureName
 }: PaywallModalProps) {
@@ -101,7 +101,7 @@ export function PaywallModal({
             <div className="flex items-start justify-between mb-4 relative z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500/20 via-indigo-500/20 to-purple-500/20 border border-amber-500/40 text-amber-300 text-xs font-semibold uppercase tracking-wider">
                 <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-                <span>Finova Pro</span>
+                <span>Monerva Pro</span>
               </div>
               <button
                 onClick={onClose}
@@ -152,7 +152,7 @@ export function PaywallModal({
                 className="w-full py-3.5 px-5 rounded-xl font-semibold text-sm text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 active:scale-[0.99] shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 <Zap className="w-4 h-4 text-slate-950 fill-slate-950" />
-                <span>{upgrading ? "Upgrading Account..." : "Upgrade to Finova Pro — $9.99/mo"}</span>
+                <span>{upgrading ? "Upgrading Account..." : "Upgrade to Monerva Pro — $9.99/mo"}</span>
               </button>
 
               <button
@@ -166,7 +166,7 @@ export function PaywallModal({
             {/* Guarantee footer */}
             <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-center gap-2 text-[11px] text-slate-400">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Cancel anytime in settings. Powered by Finova Pro Intelligence.</span>
+              <span>Cancel anytime in settings. Powered by Monerva Pro Intelligence.</span>
             </div>
           </motion.div>
         </div>

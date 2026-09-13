@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: fintech-finova-backend
+    name: fintech-monerva-backend
     runtime: node
     plan: free
     rootDir: backend

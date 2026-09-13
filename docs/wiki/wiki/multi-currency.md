@@ -2,7 +2,7 @@
 
 Last Updated: 2026-07-19
 
-This wiki page outlines the multi-currency conversion architectures, rates provider abstractions, and display rules in the Expense Tracker.
+This wiki page outlines the multi-currency conversion architectures, rates provider abstractions, and display rules in Monerva.
 
 ---
 

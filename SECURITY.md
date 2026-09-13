@@ -1,6 +1,6 @@
 # Security Policy
 
-We take security and private user financial data seriously. Thank you for helping us keep Expense Tracker safe.
+We take security and private user financial data seriously. Thank you for helping us keep Monerva safe.
 
 ---
 

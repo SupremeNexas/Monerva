@@ -24,7 +24,7 @@ describe('Income Tracking & Accounting Model Integrity Test Suite', () => {
       user = await prisma.user.create({
         data: {
           id: testUserId,
-          email: 'income-tester@finova.local',
+          email: 'income-tester@monerva.local',
           name: 'Income Tester',
           authProvider: 'LOCAL'
         }

@@ -160,7 +160,7 @@ ensureDefaultWorkspaces().then(() => {
   startSchedulerJobs(24 * 60 * 60 * 1000);
 
   app.listen(PORT, () => {
-    console.log(`\n🚀 Finova API running on port ${PORT}`);
+    console.log(`\n🚀 Monerva API running on port ${PORT}`);
     if (!isProduction) {
       console.log(`📊 Health check: http://localhost:${PORT}/api/health\n`);
     }

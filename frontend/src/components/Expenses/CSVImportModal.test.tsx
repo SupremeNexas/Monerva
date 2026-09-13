@@ -112,7 +112,7 @@ describe('CSVImportModal Component Suite', () => {
     fireEvent.change(fileInput, { target: { files: [file] } });
 
     await waitFor(() => {
-      expect(screen.getByText(/Map CSV Columns to Finova Fields/i)).toBeInTheDocument();
+      expect(screen.getByText(/Map CSV Columns to Monerva Fields/i)).toBeInTheDocument();
     });
 
     expect(screen.getAllByText('Starbucks Coffee').length).toBeGreaterThan(0);

@@ -1,4 +1,4 @@
-# 💸 Expense Tracker
+# 💸 Monerva
 
 > A premium, AI-native personal finance platform. Track expenses, manage budgets, monitor recurring bills, analyse spending with AI-powered insights, and collaborate on shared group expenses — all in one production-ready application. 
 
@@ -76,7 +76,7 @@
 ## 📂 Project Structure
 
 ```
-Expense-Tracker/
+Monerva/
 ├── frontend/                   # Vite + React 19 SPA
 │   ├── src/
 │   │   ├── api/client.ts       # Typed fetch client with auth + workspace headers

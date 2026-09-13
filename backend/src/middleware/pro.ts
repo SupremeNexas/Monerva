@@ -3,7 +3,7 @@ import { prisma } from '../db/prisma';
 import { AuthenticatedRequest } from './auth';
 
 /**
- * Middleware to enforce Finova Pro entitlement on premium AI routes.
+ * Middleware to enforce Monerva Pro entitlement on premium AI routes.
  * FREE users receive HTTP 403 with error: "PRO_REQUIRED".
  * Demo account and PRO users pass seamlessly.
  */
@@ -28,7 +28,7 @@ export const requirePro = async (req: AuthenticatedRequest, res: Response, next:
     if (!isPro) {
       return res.status(403).json({
         error: 'PRO_REQUIRED',
-        message: 'This feature requires Finova Pro.'
+        message: 'This feature requires Monerva Pro.'
       });
     }
 

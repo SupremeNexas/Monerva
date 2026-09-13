@@ -28,7 +28,7 @@ export default function PrivacyPage() {
           <div className="p-4 bg-indigo-500/10 border border-indigo-500/30 rounded-xl flex items-start gap-3 text-indigo-200 text-xs">
             <Lock className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
             <div>
-              <strong>Privacy Protection Commitment:</strong> Finova collects only the data necessary to deliver personal finance accounting, receipt scanning, and document retrieval. We do not sell your personal financial records to third-party ad networks or data brokers.
+              <strong>Privacy Protection Commitment:</strong> Monerva collects only the data necessary to deliver personal finance accounting, receipt scanning, and document retrieval. We do not sell your personal financial records to third-party ad networks or data brokers.
             </div>
           </div>
 
@@ -49,7 +49,7 @@ export default function PrivacyPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white uppercase tracking-wider">2. Third-Party Data Transfers</h2>
             <p>
-              To operate Finova technically, certain data is processed through essential infrastructure providers:
+              To operate Monerva technically, certain data is processed through essential infrastructure providers:
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
               <div className="p-4 bg-white/5 border border-white/10 rounded-xl space-y-1 text-xs">
@@ -115,14 +115,14 @@ export default function PrivacyPage() {
               <p>Legal Entity: [LEGAL_ENTITY_NAME_REQUIRED]</p>
               <p>Address: [REGISTERED_ADDRESS_REQUIRED]</p>
               <p>Grievance Officer: [GRIEVANCE_OFFICER_NAME_REQUIRED]</p>
-              <p>Email: grievance@finova.app</p>
+              <p>Email: grievance@monerva.app</p>
             </div>
           </section>
 
         </main>
 
         <footer className="mt-8 text-center text-xs text-slate-500">
-          Last revised: September 2026. Version 1.0. Finova Security & Privacy.
+          Last revised: September 2026. Version 1.0. Monerva Security & Privacy.
         </footer>
       </div>
     </div>

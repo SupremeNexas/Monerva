@@ -9,6 +9,7 @@ import { useToast } from '../components/UI/Toast';
 import { PaywallModal } from '../components/UI/PaywallModal';
 import useAuthStore from '../store/authStore';
 import { formatCurrency } from '../utils/currency';
+import { trackEvent, getLengthBucket } from '../services/analytics';
 import { 
   ResponsiveContainer, BarChart, Bar, XAxis, YAxis, 
   Tooltip, Cell, PieChart, Pie, LineChart, Line, CartesianGrid 
@@ -102,7 +103,7 @@ export default function AIAssistantPage() {
       ]);
     },
     onError: (err: any) => {
-      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Finova Pro')) {
+      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Monerva Pro')) {
         setShowPaywall(true);
       } else {
         showToast(err.message || 'AI Assistant failed to reply', 'error');
@@ -118,6 +119,11 @@ export default function AIAssistantPage() {
       return;
     }
 
+    trackEvent('ai_assistant_used', {
+      surface: 'assistant',
+      prompt_length_bucket: getLengthBucket(text.trim()),
+    });
+
     // Add user message
     setMessages(prev => [
       ...prev,
@@ -127,7 +133,7 @@ export default function AIAssistantPage() {
         content: text.trim()
       }
     ]);
-    
+
     setChatInput('');
     chatMutation.mutate(text.trim());
   };
@@ -178,7 +184,7 @@ export default function AIAssistantPage() {
       </div>
 
       {/* Chat Messages Log Area */}
-      <div className="flex-1 overflow-y-auto space-y-6 pr-1 pb-4">
+      <div className="flex-1 overflow-y-auto space-y-6 pr-1 pb-4" data-lenis-prevent>
         {messages.map((msg) => {
           const isUser = msg.role === 'user';
           return (

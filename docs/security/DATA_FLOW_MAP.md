@@ -1,7 +1,7 @@
-# Finova System Data Flow Map & Architecture Blueprint
+# Monerva System Data Flow Map & Architecture Blueprint
 
 **Document Date:** September 13, 2026  
-**System Name:** Finova Personal Financial Management & Document Intelligence Platform  
+**System Name:** Monerva Personal Financial Management & Document Intelligence Platform  
 **Target Release:** v1.0 Production Release Candidate  
 
 ---

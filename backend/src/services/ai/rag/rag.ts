@@ -5,7 +5,7 @@ import {
   RAG_INTENT_SYSTEM_INSTRUCTION,
   getRAGIntentPrompt,
   CHAT_SYSTEM_INSTRUCTION
-} from '../prompts';
+} from '../prompts/index';
 
 /**
  * Executes a conversational query using Intent Detection and Prisma DB filtering (RAG)

@@ -2,19 +2,19 @@
 
 **Last Updated:** September 13, 2026
 
-This Policy describes how **Finova** (`[LEGAL_ENTITY_NAME_REQUIRED]`) utilizes browser web storage.
+This Policy describes how **Monerva** (`[LEGAL_ENTITY_NAME_REQUIRED]`) utilizes browser web storage.
 
 ---
 
 ### 1. Cookies Disclosure
 
-Finova does not set third-party tracking cookies, advertising pixels, or marketing beacons. Finova does not track user browsing activity across external websites.
+Monerva does not set third-party tracking cookies, advertising pixels, or marketing beacons. Monerva does not track user browsing activity across external websites.
 
 ---
 
 ### 2. Browser Local Storage Inventory
 
-Finova uses browser local storage (`localStorage`) to maintain client application state across page refreshes:
+Monerva uses browser local storage (`localStorage`) to maintain client application state across page refreshes:
 
 | Key Name | Category | Purpose |
 | :--- | :--- | :--- |
@@ -30,10 +30,10 @@ Finova uses browser local storage (`localStorage`) to maintain client applicatio
 Unlike cookies configured with `HttpOnly` attributes, items stored in browser `localStorage` are accessible to JavaScript executing in the application origin. To mitigate risk:
 - API communications are transmitted over TLS/HTTPS encryption.
 - Authentication tokens carry explicit expiration limits.
-- Users are advised to access Finova from secure, private devices and maintain updated web browsers.
+- Users are advised to access Monerva from secure, private devices and maintain updated web browsers.
 
 ---
 
 ### 4. Managing Web Storage
 
-Users can inspect or clear browser `localStorage` items at any time through browser developer tools or settings. Logging out of Finova removes stored authentication token keys (`fintech_token`, `fintech_refresh_token`, `fintech_workspace_id`) from local web storage.
+Users can inspect or clear browser `localStorage` items at any time through browser developer tools or settings. Logging out of Monerva removes stored authentication token keys (`fintech_token`, `fintech_refresh_token`, `fintech_workspace_id`) from local web storage.

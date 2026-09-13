@@ -13,7 +13,7 @@ import {
   BillScannerService
 } from '../src/services/ai';
 
-describe('Finova AI Architecture & Separation Test Suite', () => {
+describe('Monerva AI Architecture & Separation Test Suite', () => {
 
   it('1. VISION ISOLATION: getVisionAIProvider() throws UNAVAILABLE when GEMINI_API_KEY is unset', () => {
     const originalKey = process.env.GEMINI_API_KEY;

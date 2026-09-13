@@ -16,6 +16,7 @@ import { SkeletonCard, SkeletonList } from '../components/UI/Skeleton';
 import EmptyState from '../components/UI/EmptyState';
 import useAuthStore from '../store/authStore';
 import { formatCurrency } from '../utils/currency';
+import { trackEvent, getLengthBucket } from '../services/analytics';
 
 export default function CopilotPage() {
   const queryClient = useQueryClient();
@@ -70,7 +71,7 @@ export default function CopilotPage() {
       setChatHistory(prev => [...prev, { role: 'assistant', content: res.reply }]);
     },
     onError: (err: any) => {
-      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Finova Pro')) {
+      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Monerva Pro')) {
         setShowPaywall(true);
       } else {
         showToast(err.message || 'Assistant failed to reply', 'error');
@@ -90,7 +91,7 @@ export default function CopilotPage() {
       setScannedResult(res.ocrResult);
     },
     onError: (err: any) => {
-      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Finova Pro')) {
+      if (err?.message === 'PRO_REQUIRED' || err?.message?.includes('Monerva Pro')) {
         setShowPaywall(true);
       } else {
         showToast(err.message || 'Failed to scan receipt', 'error');
@@ -487,7 +488,7 @@ export default function CopilotPage() {
           </div>
 
           {/* Chat scroll container */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-black/[0.01] dark:bg-white/[0.01] text-left">
+          <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-black/[0.01] dark:bg-white/[0.01] text-left" data-lenis-prevent>
             {chatHistory.map((msg, idx) => {
               const isUser = msg.role === 'user';
               return (

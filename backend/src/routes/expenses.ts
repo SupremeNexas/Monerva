@@ -332,7 +332,7 @@ router.get('/export', requireWorkspaceRole(['OWNER', 'ADMIN', 'EDITOR', 'VIEWER'
     );
 
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-    res.setHeader('Content-Disposition', `attachment; filename="finova_expenses_${new Date().toISOString().substring(0, 10)}.csv"`);
+    res.setHeader('Content-Disposition', `attachment; filename="monerva_expenses_${new Date().toISOString().substring(0, 10)}.csv"`);
     res.send(csvOutput);
   } catch (err) {
     console.error('Error exporting expenses CSV:', err);

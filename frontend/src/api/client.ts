@@ -2,8 +2,8 @@ const getApiBase = (): string => {
   const envUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.trim().replace(/\/$/, '') : '';
 
   // Override stale/deprecated backend domain if set in environment variables
-  if (envUrl.includes('fintech-expense-tracker-backend.onrender.com')) {
-    return 'https://fintech-finova-backend.onrender.com/api';
+  if (envUrl.includes('fintech-expense-tracker-backend.onrender.com') || envUrl.includes('fintech-finova-backend.onrender.com')) {
+    return 'https://fintech-monerva-backend.onrender.com/api';
   }
 
   if (envUrl) {
@@ -14,7 +14,7 @@ const getApiBase = (): string => {
   }
 
   if (typeof window !== 'undefined' && window.location.hostname.endsWith('vercel.app')) {
-    return 'https://fintech-finova-backend.onrender.com/api';
+    return 'https://fintech-monerva-backend.onrender.com/api';
   }
 
   return '/api';
@@ -158,7 +158,7 @@ export const api = {
     const downloadUrl = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = downloadUrl;
-    link.download = `finova_transactions_${new Date().toISOString().substring(0, 10)}.csv`;
+    link.download = `monerva_transactions_${new Date().toISOString().substring(0, 10)}.csv`;
     document.body.appendChild(link);
     link.click();
     link.remove();

@@ -2,7 +2,7 @@
 
 Last Updated: 2026-07-19
 
-This wiki page outlines the engineering structure, modular design, and data flows of the artificial intelligence subsystem in the Expense Tracker.
+This wiki page outlines the engineering structure, modular design, and data flows of the artificial intelligence subsystem in Monerva.
 
 ---
 

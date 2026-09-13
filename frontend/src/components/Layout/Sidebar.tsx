@@ -67,7 +67,7 @@ export function Sidebar({ mobileOpen, setMobileOpen, collapsed, setCollapsed }: 
           ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
         `}
       >
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto" data-lenis-prevent>
           <div className="h-16 flex items-center justify-between px-6 border-b border-[#e5eeff]">
             {!collapsed && <span className="font-bold text-[#0b1c30]">Balance</span>}
             <button onClick={() => setCollapsed(!collapsed)} className="p-2 rounded-lg hover:bg-[#eff4ff]">

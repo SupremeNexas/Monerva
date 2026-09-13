@@ -7,6 +7,7 @@ import {
 import { api } from '../api/client';
 import useAuthStore from '../store/authStore';
 import { useToast } from '../components/UI/Toast';
+import { trackEvent } from '../services/analytics';
 
 export default function FriendsPage() {
   const { showToast } = useToast();
@@ -84,6 +85,7 @@ export default function FriendsPage() {
     mutationFn: (email: string) => api.sendFriendRequest(email),
     onSuccess: () => {
       showToast('Friend request sent!', 'success');
+      trackEvent('friend_request_sent', { method: 'email_search' });
       setAddEmail('');
       setNonExistentEmail(null);
       refetchPending();
@@ -104,6 +106,7 @@ export default function FriendsPage() {
     mutationFn: (requestId: string) => api.acceptFriendRequest(requestId),
     onSuccess: () => {
       showToast('Friend request accepted!', 'success');
+      trackEvent('friend_request_accepted');
       refetchFriends();
       refetchPending();
       queryClient.invalidateQueries({ queryKey: ['friends'] });
@@ -145,6 +148,10 @@ export default function FriendsPage() {
     mutationFn: ({ friendshipId, data }: { friendshipId: string; data: any }) => api.addFriendExpense(friendshipId, data),
     onSuccess: () => {
       showToast('Shared expense added!', 'success');
+      trackEvent('shared_expense_created', {
+        participant_count: 2,
+        split_method: expenseForm.split_type,
+      });
       setShowExpenseModal(null);
       setExpenseForm({ title: '', amount: '', split_type: 'equal', date: new Date().toISOString().substring(0, 10) });
       queryClient.invalidateQueries({ queryKey: ['friends'] });
@@ -161,6 +168,7 @@ export default function FriendsPage() {
     mutationFn: ({ friendshipId, payload }: { friendshipId: string; payload: any }) => api.settleWithFriend(friendshipId, payload),
     onSuccess: (res: any) => {
       showToast(res.message || 'Settlement recorded!', 'success');
+      trackEvent('settlement_recorded', { settlement_type: 'friend' });
       setShowSettleModal(null);
       setSettleForm({ amount: '', notes: '', date: new Date().toISOString().substring(0, 10) });
       queryClient.invalidateQueries({ queryKey: ['friends'] });
@@ -288,7 +296,7 @@ export default function FriendsPage() {
   return (
     <div className="flex flex-col lg:flex-row gap-6 h-[calc(100vh-120px)] overflow-hidden fade-in-up">
       {/* Sidebar Area */}
-      <div className="w-full lg:w-96 flex flex-col gap-6 shrink-0 h-full overflow-y-auto pb-4 pr-1">
+      <div className="w-full lg:w-96 flex flex-col gap-6 shrink-0 h-full overflow-y-auto pb-4 pr-1" data-lenis-prevent>
 
         {/* ADD FRIEND CARD */}
         <div className="premium-card p-4 border-black/[0.05] dark:border-white/[0.05] space-y-4">
@@ -477,7 +485,7 @@ export default function FriendsPage() {
         </div>
 
         {/* Scrolling list */}
-        <div className="flex-1 overflow-y-auto divide-y divide-black/[0.04] dark:divide-white/[0.04] pr-1">
+        <div className="flex-1 overflow-y-auto divide-y divide-black/[0.04] dark:divide-white/[0.04] pr-1" data-lenis-prevent>
           {friends.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center py-20">
               <Users className="w-12 h-12 text-gray-300 stroke-[1.5] mb-3" />

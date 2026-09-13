@@ -1,13 +1,13 @@
-# Finova Directory & Project Structure
+# Monerva Directory & Project Structure
 
-This document outlines the organized, modular directory layout of the Finova enterprise-grade personal finance platform.
+This document outlines the organized, modular directory layout of the Monerva enterprise-grade personal finance platform.
 
 ---
 
 ## High-Level Architecture Overview
 
 ```
-Finova Repository Root
+Monerva Repository Root
 ├── frontend/                 # React 19 + TypeScript + Vite Single Page Application
 ├── backend/                  # Node.js + Express + Prisma REST API & AI Engine
 ├── docs/                     # Central documentation directory

@@ -201,8 +201,8 @@ export default function Nexova404Page() {
         {/* Navigation Bar */}
         <header className="flex items-center justify-between px-6 md:px-12 lg:px-16 py-5">
           <Link to="/dashboard" className="flex items-center gap-3">
-            <img src="/favicon.svg" alt="Finova" className="w-8 h-8" />
-            <span className="text-white text-xl font-bold tracking-wider font-sans">Finova</span>
+            <img src="/favicon.svg" alt="Monerva" className="w-8 h-8" />
+            <span className="text-white text-xl font-bold tracking-wider font-sans">Monerva</span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">

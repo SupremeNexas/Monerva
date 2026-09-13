@@ -2,7 +2,7 @@
 
 Last Updated: 2026-07-19
 
-This document outlines the visual variables, styling guidelines, and theme tokens implemented across the Expense Tracker web application. The design system is inspired by premium SaaS layouts (Linear, Stripe, CRED) and is optimized for both light and dark modes.
+This document outlines the visual variables, styling guidelines, and theme tokens implemented across the Monerva web application. The design system is inspired by premium SaaS layouts (Linear, Stripe, CRED) and is optimized for both light and dark modes.
 
 ---
 

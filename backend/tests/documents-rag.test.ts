@@ -65,7 +65,7 @@ startxref
   return Buffer.from(pdfString);
 }
 
-describe('Finova Production RAG & Financial Document Test Suite', () => {
+describe('Monerva Production RAG & Financial Document Test Suite', () => {
   let userA: any;
   let userB: any;
   let workspaceA: any;

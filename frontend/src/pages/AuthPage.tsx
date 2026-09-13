@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import useAuthStore from '../store/authStore';
 import { useToast } from '../components/UI/Toast';
 import { SUPPORTED_CURRENCIES } from '../utils/currency';
 import { AlertCircle, ArrowRight, Sparkles } from 'lucide-react';
+import TurnstileWidget, { TurnstileWidgetRef } from '../components/UI/TurnstileWidget';
 
 // ── Google GSI Type Declarations ──────────────────────────────────────────────
 declare global {
@@ -36,6 +37,13 @@ export default function AuthPage() {
 
   const [isLogin, setIsLogin] = useState(true);
   const [invitedBy, setInvitedBy] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<TurnstileWidgetRef>(null);
+
+  const resetTurnstile = useCallback(() => {
+    setTurnstileToken(null);
+    turnstileRef.current?.reset();
+  }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -182,10 +190,15 @@ export default function AuthPage() {
       }
     }
 
+    if (!turnstileToken) {
+      showToast('Please complete the security check before continuing.', 'error');
+      return;
+    }
+
     setIsLoading(true);
     try {
       if (isLogin) {
-        await login({ email: formData.email, password: formData.password });
+        await login({ email: formData.email, password: formData.password, turnstileToken });
         showToast('Welcome back!', 'success');
       } else {
         await register({
@@ -193,26 +206,34 @@ export default function AuthPage() {
           email: formData.email,
           password: formData.password,
           baseCurrency: formData.baseCurrency,
-          invitedBy
+          invitedBy,
+          turnstileToken
         });
         showToast('Account created successfully!', 'success');
       }
       navigate('/dashboard');
     } catch (err: any) {
       showToast(err.message || 'Authentication failed', 'error');
+      resetTurnstile();
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleDemoLogin = async () => {
+    if (!turnstileToken) {
+      showToast('Please complete the security check before logging in with Demo.', 'error');
+      return;
+    }
+
     setIsLoading(true);
     try {
-      await login({ email: 'demo@example.com', password: 'password123' });
+      await login({ email: 'demo@example.com', password: 'password123', turnstileToken });
       showToast('Signed in with Demo Account!', 'success');
       navigate('/dashboard');
     } catch (err: any) {
       showToast(err.message || 'Demo login failed', 'error');
+      resetTurnstile();
     } finally {
       setIsLoading(false);
     }
@@ -244,7 +265,7 @@ export default function AuthPage() {
 
         <div className="mb-8">
           <h1 className="text-[28px] font-bold tracking-tight text-[#111113] mb-2 font-display">
-            {isLogin ? 'Sign in to Finova' : 'Create your account'}
+            {isLogin ? 'Sign in to Monerva' : 'Create your account'}
           </h1>
           <p className="text-sm font-normal text-gray-600">
             {isLogin ? "We'll sign you in securely to your command center." : "Get started with intelligent account tracking today."}
@@ -340,6 +361,14 @@ export default function AuthPage() {
             </div>
           )}
 
+          {/* Turnstile Security Verification Widget */}
+          <TurnstileWidget
+            ref={turnstileRef}
+            onSuccess={(token) => setTurnstileToken(token)}
+            onExpire={() => setTurnstileToken(null)}
+            onError={() => setTurnstileToken(null)}
+          />
+
           <button
             type="submit"
             disabled={isAnyLoading}
@@ -375,7 +404,7 @@ export default function AuthPage() {
 
         <div className="mt-6 text-center text-xs text-gray-500 space-y-3">
           <p className="text-[11px] text-gray-500 leading-normal">
-            By creating an account or signing in, you agree to Finova's{' '}
+            By creating an account or signing in, you agree to Monerva's{' '}
             <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline font-medium">Terms of Service</a>,{' '}
             <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline font-medium">Privacy Policy</a>,{' '}
             <a href="/acceptable-use" target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline font-medium">Acceptable Use Policy</a>, and{' '}
@@ -388,7 +417,10 @@ export default function AuthPage() {
                 Don't have an account?{' '}
                 <button
                   type="button"
-                  onClick={() => setIsLogin(false)}
+                  onClick={() => {
+                    setIsLogin(false);
+                    resetTurnstile();
+                  }}
                   className="text-indigo-600 font-semibold hover:underline bg-transparent border-none cursor-pointer"
                 >
                   Sign up
@@ -399,7 +431,10 @@ export default function AuthPage() {
                 Already have an account?{' '}
                 <button
                   type="button"
-                  onClick={() => setIsLogin(true)}
+                  onClick={() => {
+                    setIsLogin(true);
+                    resetTurnstile();
+                  }}
                   className="text-indigo-600 font-semibold hover:underline bg-transparent border-none cursor-pointer"
                 >
                   Sign in

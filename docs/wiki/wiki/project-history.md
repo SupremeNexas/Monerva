@@ -1,12 +1,12 @@
 # Project History: SettleKar Inheritance
 Last Updated: 2026-07-05
 
-This document records the architectural decisions, shared design patterns, and components adapted from the **SettleKar** repository (https://github.com/SupremeNexas/SettleKar), as well as the unique advancements introduced in the **Expense Tracker** project.
+This document records the architectural decisions, shared design patterns, and components adapted from the **SettleKar** repository (https://github.com/SupremeNexas/SettleKar), as well as the unique advancements introduced in the **Monerva** project.
 
 ---
 
 ## 🏗️ Architectural Patterns Adopted
-The Expense Tracker inherits the structural decisions established in the SettleKar ecosystem to maintain development consistency:
+Monerva inherits the structural decisions established in the SettleKar ecosystem to maintain development consistency:
 
 ### 1. Unified Authentication Architecture
 * **Flow**: Short-lived JWT access tokens stored in memory, paired with long-lived database-backed refresh tokens in `localStorage`.
@@ -41,7 +41,7 @@ We structured key components to mirror SettleKar's visual aesthetics:
 ---
 
 ## 🚀 Improvements & Extensions over SettleKar
-While inheriting structural guidelines, the Expense Tracker implements several design advancements:
+While inheriting structural guidelines, Monerva implements several design advancements:
 
 ### 1. Upgrade to Modern Web Standards
 * **Core**: Built on **React 19** and **TailwindCSS v4**, utilizing native layers (`@import "tailwindcss"`) and optimized CSS assets.

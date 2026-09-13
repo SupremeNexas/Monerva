@@ -3,7 +3,7 @@
 **Status:** PENDING HUMAN LEGAL COUNSEL REVIEW  
 **Date:** September 13, 2026
 
-The technical implementation of legal consent logging, tenant-isolated data erasure, prompt protection, and privacy documentation is complete. However, before Finova can be publicly or commercially deployed, qualified legal counsel must review and complete the following mandatory items:
+The technical implementation of legal consent logging, tenant-isolated data erasure, prompt protection, and privacy documentation is complete. However, before Monerva can be publicly or commercially deployed, qualified legal counsel must review and complete the following mandatory items:
 
 ---
 
@@ -22,7 +22,7 @@ The following bracketed placeholders in `docs/legal/` and frontend pages must be
 
 ### 2. Regulatory & Legal Counsel Verification
 
-- [ ] **Financial Regulator Exemption Review:** Confirm that Finova's self-directed ledger features remain exempt from banking/NBFC licensing in your target operating jurisdictions.
+- [ ] **Financial Regulator Exemption Review:** Confirm that Monerva's self-directed ledger features remain exempt from banking/NBFC licensing in your target operating jurisdictions.
 - [ ] **Data Protection Compliance:** Obtain formal legal sign-off under applicable local privacy laws (e.g., GDPR, CCPA/CPRA, India DPDP Act 2023).
 - [ ] **Terms Acceptance Flow:** Ensure explicit clickwrap consent is collected on registration and major terms revisions.
 - [ ] **Insurance & Commercial Liability:** Verify commercial general liability and cyber insurance policies cover AI software tools.

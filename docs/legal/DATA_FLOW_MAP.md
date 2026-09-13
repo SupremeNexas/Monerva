@@ -2,7 +2,7 @@
 
 **Last Updated:** September 13, 2026
 
-This document outlines data flows, storage locations, third-party processing boundaries, and security controls within **Finova** (`[LEGAL_ENTITY_NAME_REQUIRED]`).
+This document outlines data flows, storage locations, third-party processing boundaries, and security controls within **Monerva** (`[LEGAL_ENTITY_NAME_REQUIRED]`).
 
 ---
 

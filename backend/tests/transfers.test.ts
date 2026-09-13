@@ -26,7 +26,7 @@ describe('First-Class Account Transfers & Balance Integrity Test Suite', () => {
       await prisma.user.create({
         data: {
           id: testUserId,
-          email: 'transfer-tester@finova.local',
+          email: 'transfer-tester@monerva.local',
           name: 'Transfer Tester',
           authProvider: 'LOCAL'
         }

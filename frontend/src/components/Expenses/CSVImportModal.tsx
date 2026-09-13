@@ -16,6 +16,7 @@ import {
 import { api } from '../../api/client';
 import { useToast } from '../UI/Toast';
 import { useQueryClient } from '@tanstack/react-query';
+import { trackEvent } from '../../services/analytics';
 
 interface CSVImportModalProps {
   isOpen: boolean;
@@ -73,7 +74,7 @@ export function CSVImportModal({ isOpen, onClose }: CSVImportModalProps) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'finova_sample_import.csv';
+    link.download = 'monerva_sample_import.csv';
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -138,6 +139,12 @@ export function CSVImportModal({ isOpen, onClose }: CSVImportModalProps) {
 
       setImportSummary(res.summary);
       setStep(4);
+
+      trackEvent('csv_import_completed', {
+        total_rows: res.summary.total,
+        imported_rows: res.summary.imported,
+        skipped_duplicates: res.summary.duplicates,
+      });
 
       // Invalidate relevant React Query caches
       queryClient.invalidateQueries({ queryKey: ['expenses'] });
@@ -275,7 +282,7 @@ export function CSVImportModal({ isOpen, onClose }: CSVImportModalProps) {
               <div className="p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/[0.05] dark:border-white/[0.05] space-y-3">
                 <div className="flex items-center justify-between pb-2 border-b border-black/[0.04] dark:border-white/[0.04]">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 flex items-center gap-1.5">
-                    <SlidersHorizontal className="w-3.5 h-3.5 text-emerald-500" /> Map CSV Columns to Finova Fields
+                    <SlidersHorizontal className="w-3.5 h-3.5 text-emerald-500" /> Map CSV Columns to Monerva Fields
                   </h4>
                   <span className="text-[11px] text-gray-400">
                     Detected {previewData.detectedHeaders.length} CSV Columns

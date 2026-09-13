@@ -18,7 +18,7 @@ import {
   getRecommendationsPrompt,
   HEALTH_SCORE_SYSTEM_INSTRUCTION,
   getHealthScorePrompt
-} from '../prompts';
+} from '../prompts/index';
 
 /**
  * AI Spending Insights Generator (Scoped to User & Workspace)

@@ -8,6 +8,7 @@ import { api } from '../api/client';
 import { useToast } from '../components/UI/Toast';
 import useAuthStore from '../store/authStore';
 import EmptyState from '../components/UI/EmptyState';
+import { trackEvent } from '../services/analytics';
 
 export default function GroupsPage() {
   const queryClient = useQueryClient();
@@ -75,6 +76,7 @@ export default function GroupsPage() {
     mutationFn: (name: string) => api.createGroup({ name }),
     onSuccess: () => {
       showToast('Shared Group created!', 'success');
+      trackEvent('group_created', { member_count: 1 });
       queryClient.invalidateQueries({ queryKey: ['groups'] });
       setNewGroupName('');
       setShowNewGroup(false);
@@ -240,7 +242,7 @@ export default function GroupsPage() {
           )}
 
           {/* Scrolling group listing */}
-          <div className="overflow-y-auto flex-1 space-y-2 pr-1">
+          <div className="overflow-y-auto flex-1 space-y-2 pr-1" data-lenis-prevent>
             {groupsLoading ? (
               <div className="text-center text-xs text-gray-400 py-6">Loading groups...</div>
             ) : groups.length === 0 ? (

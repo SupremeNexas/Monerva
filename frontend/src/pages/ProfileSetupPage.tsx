@@ -6,6 +6,7 @@ import { useToast } from '../components/UI/Toast';
 import { SUPPORTED_CURRENCIES } from '../utils/currency';
 import { ArrowRight, User as UserIcon, Receipt, Sliders, Bot, TrendingUp, Swords } from 'lucide-react';
 import Carousel, { CarouselItemType } from '../components/UI/Carousel';
+import { trackEvent } from '../services/analytics';
 
 const FEATURE_ITEMS: CarouselItemType[] = [
   {
@@ -102,6 +103,8 @@ export default function ProfileSetupPage() {
   });
 
   useEffect(() => {
+    trackEvent('onboarding_started');
+
     if (user) {
       // Fetch browser local settings dynamically
       let detectedTimezone = 'UTC';
@@ -177,7 +180,13 @@ export default function ProfileSetupPage() {
         onboardingComplete: true
       });
 
-      showToast('Profile completed successfully! Welcome to Finova.', 'success');
+      showToast('Profile completed successfully! Welcome to Monerva.', 'success');
+      trackEvent('onboarding_completed', {
+        has_country: Boolean(formData.country),
+        has_currency: Boolean(formData.baseCurrency),
+        has_income_bracket: Boolean(formData.monthlyIncome),
+        has_goal: Boolean(formData.preferredGoal),
+      });
       navigate('/dashboard');
     } catch (err: any) {
       console.error('[Onboarding Setup] Failed:', err);
@@ -212,13 +221,13 @@ export default function ProfileSetupPage() {
 
         <div className="mb-6">
           <h1 className="text-2xl font-bold tracking-tight text-[#111113] mb-1 font-display">
-            {step === 1 ? 'Welcome to Finova' : step === 2 ? 'Complete your Profile' : 'Configure financial goals'}
+            {step === 1 ? 'Welcome to Monerva' : step === 2 ? 'Complete your Profile' : 'Configure financial goals'}
           </h1>
           <p className="text-xs font-normal text-gray-500 leading-normal">
             {step === 1
-              ? 'Here is an overview of what you can do with Finova to streamline your analytical finances.'
+              ? 'Here is an overview of what you can do with Monerva to streamline your analytical finances.'
               : step === 2
-              ? 'Tell us a bit about yourself. Finova uses these details to personalize display labels.'
+              ? 'Tell us a bit about yourself. Monerva uses these details to personalize display labels.'
               : 'Add your currency and budget details to configure active financial charts.'}
           </p>
         </div>

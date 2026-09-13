@@ -145,7 +145,7 @@ describe('ProfileSetupPage Flow Tests', () => {
         longTermGoal: null,
         onboardingComplete: true
       });
-      expect(mockShowToast).toHaveBeenCalledWith('Profile completed successfully! Welcome to Finova.', 'success');
+      expect(mockShowToast).toHaveBeenCalledWith('Profile completed successfully! Welcome to Monerva.', 'success');
       expect(mockNavigate).toHaveBeenCalledWith('/dashboard');
     });
   });
