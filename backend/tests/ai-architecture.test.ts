@@ -11,7 +11,7 @@ import {
   AIService,
   FinancialInsightsService,
   BillScannerService
-} from '../services/ai';
+} from '../src/services/ai';
 
 describe('Finova AI Architecture & Separation Test Suite', () => {
 

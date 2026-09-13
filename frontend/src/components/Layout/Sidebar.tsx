@@ -5,7 +5,7 @@ import { api } from '../../api/client';
 import {
   LayoutDashboard, Receipt, Repeat, CreditCard, CalendarClock, Users,
   Wallet, Tags, Settings, LogOut, ChevronLeft, ChevronRight, UserPlus, TrendingUp, ArrowLeftRight,
-  Bot, Sparkles
+  Bot, Sparkles, FileText
 } from 'lucide-react';
 import useAuthStore from '../../store/authStore';
 
@@ -20,6 +20,7 @@ const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { path: '/assistant', label: 'AI Assistant', icon: Bot, isPro: true },
   { path: '/copilot', label: 'AI Copilot', icon: Sparkles, isPro: true },
+  { path: '/documents', label: 'Document Vault', icon: FileText, isPro: true },
   { path: '/income', label: 'Income', icon: TrendingUp },
   { path: '/transfers', label: 'Transfers', icon: ArrowLeftRight },
   { path: '/expenses', label: 'Transactions', icon: Receipt },

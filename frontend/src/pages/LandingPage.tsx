@@ -747,9 +747,11 @@ export default function LandingPage() {
 
             <div className="flex flex-col gap-3">
               <h4 className="text-white text-xs font-bold uppercase tracking-wider">Legal</h4>
+              <Link className="text-xs text-slate-400 hover:text-white transition-colors" to="/terms">Terms of Service</Link>
               <Link className="text-xs text-slate-400 hover:text-white transition-colors" to="/privacy">Privacy Policy</Link>
-              <Link className="text-xs text-slate-400 hover:text-white transition-colors" to="/privacy">Terms of Service</Link>
-              <Link className="text-xs text-slate-400 hover:text-white transition-colors" to="/privacy">Cookie Policy</Link>
+              <Link className="text-xs text-slate-400 hover:text-white transition-colors" to="/ai-disclaimer">AI Disclaimer</Link>
+              <Link className="text-xs text-slate-400 hover:text-white transition-colors" to="/acceptable-use">Acceptable Use</Link>
+              <Link className="text-xs text-slate-400 hover:text-white transition-colors" to="/cookies">Cookie Policy</Link>
             </div>
           </div>
         </footer>

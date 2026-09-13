@@ -21,6 +21,7 @@ const BillsPage         = React.lazy(() => import('./pages/BillsPage'));
 const GroupsPage        = React.lazy(() => import('./pages/GroupsPage'));
 const FriendsPage       = React.lazy(() => import('./pages/FriendsPage'));
 const GoalsPage         = React.lazy(() => import('./pages/GoalsPage'));
+const DocumentsPage     = React.lazy(() => import('./pages/DocumentsPage'));
 const CopilotPage       = React.lazy(() => import('./pages/CopilotPage'));
 const AIAssistantPage   = React.lazy(() => import('./pages/AIAssistantPage'));
 const WorkspaceSettings = React.lazy(() => import('./pages/WorkspaceSettings'));
@@ -29,6 +30,10 @@ const ProfilePage       = React.lazy(() => import('./pages/ProfilePage'));
 const Nexova404Page     = React.lazy(() => import('./pages/Nexova404Page'));
 const ThankYouPage      = React.lazy(() => import('./pages/ThankYouPage'));
 const PrivacyPage       = React.lazy(() => import('./pages/PrivacyPage'));
+const TermsPage         = React.lazy(() => import('./pages/TermsPage'));
+const AIDisclaimerPage  = React.lazy(() => import('./pages/AIDisclaimerPage'));
+const AcceptableUsePage = React.lazy(() => import('./pages/AcceptableUsePage'));
+const CookiePage        = React.lazy(() => import('./pages/CookiePage'));
 
 /** Full-screen spinner shown while a lazy page chunk loads */
 function PageLoader() {
@@ -126,6 +131,7 @@ function AppRoutes() {
         <Route path="/groups"             element={<ProtectedRoute><GroupsPage /></ProtectedRoute>} />
         <Route path="/friends"            element={<ProtectedRoute><FriendsPage /></ProtectedRoute>} />
         <Route path="/goals"              element={<ProtectedRoute><GoalsPage /></ProtectedRoute>} />
+        <Route path="/documents"          element={<ProtectedRoute><DocumentsPage /></ProtectedRoute>} />
         <Route path="/copilot"            element={<ProtectedRoute><CopilotPage /></ProtectedRoute>} />
         <Route path="/assistant"          element={<ProtectedRoute><AIAssistantPage /></ProtectedRoute>} />
         <Route path="/workspace-settings" element={<ProtectedRoute><WorkspaceSettings /></ProtectedRoute>} />
@@ -133,6 +139,10 @@ function AppRoutes() {
 
         {/* Privacy & Legal */}
         <Route path="/privacy"            element={<PrivacyPage />} />
+        <Route path="/terms"              element={<TermsPage />} />
+        <Route path="/ai-disclaimer"      element={<AIDisclaimerPage />} />
+        <Route path="/acceptable-use"     element={<AcceptableUsePage />} />
+        <Route path="/cookies"            element={<CookiePage />} />
         <Route path="/thank-you"          element={<ThankYouPage />} />
 
         {/* 404 */}

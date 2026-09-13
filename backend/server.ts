@@ -93,6 +93,7 @@ import groupsRouter from './src/routes/groups';
 import friendsRouter from './src/routes/friends';
 import alertsRouter from './src/routes/alerts';
 import aiRouter from './src/routes/ai';
+import documentsRouter from './src/routes/documents';
 import recurringRouter from './src/routes/recurring';
 import transfersRouter from './src/routes/transfers';
 
@@ -121,6 +122,7 @@ const mountRoutes = (prefix: string) => {
   app.use(`${prefix}/groups`, authenticate, groupsRouter);
   app.use(`${prefix}/friends`, authenticate, friendsRouter);
   app.use(`${prefix}/ai`, authenticate, aiRouter);
+  app.use(`${prefix}/documents`, authenticate, documentsRouter);
   app.use(`${prefix}/alerts`, authenticate, alertsRouter);
 
   // Workspace Collaboration, Rules & Auditing

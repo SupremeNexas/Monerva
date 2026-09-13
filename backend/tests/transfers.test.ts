@@ -1,12 +1,12 @@
 import path from 'path';
 import dotenv from 'dotenv';
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 if (!process.env.DATABASE_URL) {
   process.env.DATABASE_URL = 'postgresql://postgres@localhost:5433/expense_tracker?schema=public';
 }
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { prisma } from '../db/prisma';
+import { prisma } from '../src/db/prisma';
 
 describe('First-Class Account Transfers & Balance Integrity Test Suite', () => {
   const testUserId = 'test-transfer-user-1';

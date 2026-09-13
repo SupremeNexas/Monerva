@@ -8,9 +8,16 @@ vi.mock('react-router-dom', () => ({
   useNavigate: () => vi.fn()
 }));
 
-vi.mock('../store/authStore', () => ({
-  default: () => ({ user: { baseCurrency: 'USD', isPremium: false } })
-}));
+vi.mock('../store/authStore', () => {
+  const store = () => ({
+    user: { id: 'u1', name: 'Demo', email: 'demo@example.com', baseCurrency: 'USD', isPremium: false, plan: 'PRO' },
+    updateProfile: vi.fn()
+  });
+  return {
+    default: store,
+    useAuthStore: store
+  };
+});
 
 vi.mock('../components/UI/Toast', () => ({
   useToast: () => ({ showToast: vi.fn() })

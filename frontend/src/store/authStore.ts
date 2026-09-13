@@ -12,6 +12,7 @@ interface AuthState {
   checkAuth: () => Promise<void>;
   updateProfile: (data: any) => Promise<void>;
   updateCurrency: (currency: string) => Promise<void>;
+  deleteAccount: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -130,6 +131,14 @@ export const useAuthStore = create<AuthState>((set) => ({
     set((state) => ({
       user: state.user ? { ...state.user, baseCurrency: res.baseCurrency } : null
     }));
+  },
+
+  deleteAccount: async () => {
+    await api.deleteAccount();
+    setToken(null);
+    localStorage.removeItem('fintech_refresh_token');
+    localStorage.removeItem('fintech_workspace_id');
+    set({ user: null });
   }
 }));
 

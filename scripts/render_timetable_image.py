@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 SOURCE_IMAGE = "/Users/supryo/Downloads/WhatsApp Image 2026-07-21 at 12.51.32 PM.jpeg"
-OUTPUT_IMAGE = "/Users/supryo/Desktop/Expense-Tracker/outputs/detailed_weekly_timetable.png"
+OUTPUT_IMAGE = "/Users/supryo/Desktop/Expense-Tracker/docs/development/outputs/detailed_weekly_timetable.png"
 
 
 WIDTH = 1600

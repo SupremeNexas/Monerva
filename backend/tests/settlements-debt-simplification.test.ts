@@ -1,6 +1,6 @@
 import { describe, it, before, after, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { calculateSplits, calculateNetPositions, simplifyGroupDebts } from '../services/splits/splitEngine';
+import { calculateSplits, calculateNetPositions, simplifyGroupDebts } from '../src/services/splits/splitEngine';
 
 describe('Splitwise Settlement & Debt Simplification Unit Test Suite', () => {
 

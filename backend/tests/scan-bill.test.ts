@@ -1,7 +1,7 @@
 import { describe, it, before } from 'node:test';
 import assert from 'node:assert/strict';
-import { BillScannerService } from '../services/ai/billScanner';
-import { prisma } from '../db/prisma';
+import { BillScannerService } from '../src/services/ai/billScanner';
+import { prisma } from '../src/db/prisma';
 
 // Helper to construct valid image buffers with proper magic bytes
 function createValidJpegBuffer(): Buffer {

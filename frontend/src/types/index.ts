@@ -395,3 +395,32 @@ export interface CSVImportResult {
   };
 }
 
+export interface RAGSourceCitation {
+  filename: string;
+  originalFilename: string;
+  pageNumber: number | null;
+  chunkId: string;
+  similarity: number;
+}
+
+export interface DocumentItem {
+  id: string;
+  userId: string;
+  workspaceId?: string | null;
+  filename: string;
+  originalFilename: string;
+  mimeType: string;
+  size: number;
+  status: 'PROCESSING' | 'INDEXED' | 'FAILED';
+  errorMessage?: string | null;
+  chunkCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface RAGAnswerResult {
+  answer: string;
+  sources: RAGSourceCitation[];
+  chunksFound: number;
+}
+

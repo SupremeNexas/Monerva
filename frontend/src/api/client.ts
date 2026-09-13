@@ -110,6 +110,7 @@ export const api = {
   getMe: () => request('/auth/me'),
   updateProfile: (data: any) => request('/auth/profile', { method: 'PUT', body: data }),
   updateCurrency: (currency: string) => request('/auth/currency', { method: 'PUT', body: { currency } }),
+  deleteAccount: () => request('/auth/account', { method: 'DELETE' }),
 
   // Expenses
   getExpenses: (params: Record<string, any> = {}) => {
@@ -297,4 +298,11 @@ export const api = {
     return request(`/friends/${friendshipId}/settle`, { method: 'POST', body: payload });
   },
   getFriendSettlements: (friendshipId: string) => request(`/friends/${friendshipId}/settlements`),
+
+  // Documents RAG
+  uploadDocument: (formData: FormData) => request('/documents', { method: 'POST', body: formData }),
+  getDocuments: () => request('/documents'),
+  getDocument: (id: string) => request(`/documents/${id}`),
+  deleteDocument: (id: string) => request(`/documents/${id}`, { method: 'DELETE' }),
+  queryDocuments: (query: string) => request('/documents/query', { method: 'POST', body: { query } }),
 };

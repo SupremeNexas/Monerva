@@ -11,14 +11,10 @@
             "id": "31cdde49964dfdb2",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "backend/node_modules/object-assign/readme.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "readme"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -41,7 +37,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -181,5 +179,37 @@
     }
   },
   "active": "31cdde49964dfdb2",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "frontend/src/assets/ui-tokens/tokens-ui.json",
+    "frontend/src/assets/ui-tokens/variables-ui.css",
+    "frontend/src/assets/ui-tokens/theme-ui.css",
+    "frontend/src/assets/ui-tokens",
+    "docs/development/ROADMAP.md",
+    "docs/development/FREE_TIER.md",
+    "docs/development/CHAT_SUMMARY.md",
+    "docs/development/CONTEXT.md",
+    "docs/development/CODEX.md",
+    "docs/development/AGENTS.md",
+    "docs/architecture/DESIGN_UI.md",
+    "docs/architecture/DATABASE_PRD.md",
+    "docs/architecture/APRD.md",
+    "docs/security/SECURITY_POLICY.md",
+    "docs/security/DATA_FLOW_MAP.md",
+    "docs/security/SECURITY_AUDIT.md",
+    "docs/legal/LEGAL_AUDIT.md",
+    "docs/legal/DATA_DELETION_POLICY.md",
+    "docs/legal/COOKIE_POLICY.md",
+    "docs/legal/ACCEPTABLE_USE_POLICY.md",
+    "docs/legal/AI_DISCLAIMER.md",
+    "docs/legal/PRIVACY_POLICY.md",
+    "docs/legal/TERMS_OF_SERVICE.md",
+    "tests/frontend",
+    "tests/backend",
+    "tests",
+    "backend/tests",
+    "scripts",
+    "docs/wiki",
+    "docs/knowledge",
+    "backend/node_modules/object-assign/readme.md"
+  ]
 }

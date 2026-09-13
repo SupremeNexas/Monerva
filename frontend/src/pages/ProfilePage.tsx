@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import useAuthStore from '../store/authStore';
 import { useToast } from '../components/UI/Toast';
 import { SUPPORTED_CURRENCIES } from '../utils/currency';
-import { Save, User as UserIcon, ShieldAlert } from 'lucide-react';
+import { Save, User as UserIcon, ShieldAlert, Trash2, AlertTriangle, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const COUNTRIES = [
   { code: 'IN', label: 'India' },
@@ -44,10 +45,14 @@ const FINANCIAL_GOALS = [
 ];
 
 export default function ProfilePage() {
-  const { user, updateProfile } = useAuthStore();
+  const { user, updateProfile, deleteAccount } = useAuthStore();
   const { showToast } = useToast();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteConfirmText, setDeleteConfirmText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     displayName: '',
@@ -128,6 +133,24 @@ export default function ProfilePage() {
       showToast(err.message || 'Failed to save changes.', 'error');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (deleteConfirmText.trim().toUpperCase() !== 'DELETE') {
+      showToast('Please type DELETE to confirm account erasure.', 'error');
+      return;
+    }
+
+    setIsDeleting(true);
+    try {
+      await deleteAccount();
+      showToast('Account permanently deleted.', 'success');
+      navigate('/');
+    } catch (err: any) {
+      console.error('[Account Delete] Error:', err);
+      showToast(err.message || 'Failed to delete account.', 'error');
+      setIsDeleting(false);
     }
   };
 
@@ -341,9 +364,95 @@ export default function ProfilePage() {
             </button>
           </div>
 
+          {/* Danger Zone: Account Deletion */}
+          <div className="bg-red-50/50 border border-red-200/80 rounded-3xl p-6 sm:p-7 shadow-xs space-y-4 mt-8">
+            <div className="flex items-center gap-2 border-b border-red-100 pb-2">
+              <AlertTriangle className="w-4 h-4 text-red-600" />
+              <h2 className="text-sm font-bold uppercase tracking-wider text-red-900">Danger Zone — Permanent Data Erasure</h2>
+            </div>
+            <p className="text-xs text-red-700 leading-relaxed font-medium">
+              Permanent deletion purges your profile, connected wallets, transaction ledgers, uploaded PDF documents, vector embeddings, budget rules, and historical AI chat context. This action is immediate and cannot be undone.
+            </p>
+            <div className="flex justify-start pt-1">
+              <button
+                type="button"
+                onClick={() => setShowDeleteModal(true)}
+                className="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs tracking-wider transition-all duration-150 flex items-center gap-2 cursor-pointer shadow-xs active:scale-95"
+              >
+                <Trash2 className="w-4 h-4" />
+                Delete Account & Purge My Data
+              </button>
+            </div>
+          </div>
+
         </div>
 
       </form>
+
+      {/* Account Deletion Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl p-6 max-w-md w-full border border-red-100 shadow-2xl space-y-5 relative">
+            <button
+              onClick={() => setShowDeleteModal(false)}
+              className="absolute top-5 right-5 p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-3 text-red-600">
+              <div className="p-3 bg-red-100 rounded-2xl">
+                <AlertTriangle className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Confirm Account Erasure</h3>
+                <p className="text-xs text-gray-500">Action cannot be reversed</p>
+              </div>
+            </div>
+
+            <div className="text-xs text-gray-600 leading-relaxed space-y-2 bg-red-50/60 p-4 rounded-2xl border border-red-100">
+              <p className="font-semibold text-red-900">The following data will be permanently purged:</p>
+              <ul className="list-disc list-inside space-y-1 text-[11px] text-red-800">
+                <li>Personal transactions, receipts, and wallets</li>
+                <li>Financial document vault PDFs and vector embeddings</li>
+                <li>Custom budgets, goals, and savings history</li>
+                <li>AI assistant memory profiles and prompt context</li>
+              </ul>
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-semibold text-gray-700">
+                Type <span className="font-mono font-bold text-red-600">DELETE</span> to confirm:
+              </label>
+              <input
+                type="text"
+                className="w-full h-11 px-4 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-red-500 focus:outline-none uppercase font-mono"
+                placeholder="DELETE"
+                value={deleteConfirmText}
+                onChange={(e) => setDeleteConfirmText(e.target.value)}
+              />
+            </div>
+
+            <div className="flex gap-3 justify-end pt-2">
+              <button
+                type="button"
+                onClick={() => setShowDeleteModal(false)}
+                className="px-4 py-2.5 rounded-xl border border-gray-200 text-xs font-bold text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                disabled={isDeleting || deleteConfirmText.trim().toUpperCase() !== 'DELETE'}
+                onClick={handleDeleteAccount}
+                className="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs tracking-wider transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 shadow-xs"
+              >
+                {isDeleting ? 'Purging Data...' : 'Permanently Delete'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

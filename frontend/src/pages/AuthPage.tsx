@@ -373,30 +373,40 @@ export default function AuthPage() {
           />
         </div>
 
-        <div className="mt-6 text-center text-xs text-gray-500">
-          {isLogin ? (
-            <span>
-              Don't have an account?{' '}
-              <button
-                type="button"
-                onClick={() => setIsLogin(false)}
-                className="text-indigo-600 font-semibold hover:underline bg-transparent border-none cursor-pointer"
-              >
-                Sign up
-              </button>
-            </span>
-          ) : (
-            <span>
-              Already have an account?{' '}
-              <button
-                type="button"
-                onClick={() => setIsLogin(true)}
-                className="text-indigo-600 font-semibold hover:underline bg-transparent border-none cursor-pointer"
-              >
-                Sign in
-              </button>
-            </span>
-          )}
+        <div className="mt-6 text-center text-xs text-gray-500 space-y-3">
+          <p className="text-[11px] text-gray-500 leading-normal">
+            By creating an account or signing in, you agree to Finova's{' '}
+            <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline font-medium">Terms of Service</a>,{' '}
+            <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline font-medium">Privacy Policy</a>,{' '}
+            <a href="/acceptable-use" target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline font-medium">Acceptable Use Policy</a>, and{' '}
+            <a href="/ai-disclaimer" target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline font-medium">AI Disclaimer</a>.
+          </p>
+
+          <div>
+            {isLogin ? (
+              <span>
+                Don't have an account?{' '}
+                <button
+                  type="button"
+                  onClick={() => setIsLogin(false)}
+                  className="text-indigo-600 font-semibold hover:underline bg-transparent border-none cursor-pointer"
+                >
+                  Sign up
+                </button>
+              </span>
+            ) : (
+              <span>
+                Already have an account?{' '}
+                <button
+                  type="button"
+                  onClick={() => setIsLogin(true)}
+                  className="text-indigo-600 font-semibold hover:underline bg-transparent border-none cursor-pointer"
+                >
+                  Sign in
+                </button>
+              </span>
+            )}
+          </div>
         </div>
       </motion.div>
     </div>

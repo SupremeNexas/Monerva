@@ -3,15 +3,6 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, test, expect, vi, beforeEach } from 'vitest';
 import CSVImportModal from './CSVImportModal';
 
-// Mock Dependencies
-vi.mock('../UI/Toast', () => ({
-  useToast: () => ({ showToast: vi.fn() }),
-}));
-
-vi.mock('@tanstack/react-query', () => ({
-  useQueryClient: () => ({ invalidateQueries: vi.fn() }),
-}));
-
 const mockPreviewResponse = {
   totalRows: 2,
   validRowsCount: 1,
@@ -68,10 +59,19 @@ const mockPreviewResponse = {
   ]
 };
 
+// Mock Dependencies
+vi.mock('../UI/Toast', () => ({
+  useToast: () => ({ showToast: vi.fn() }),
+}));
+
+vi.mock('@tanstack/react-query', () => ({
+  useQueryClient: () => ({ invalidateQueries: vi.fn() }),
+}));
+
 vi.mock('../../api/client', () => ({
   api: {
-    previewCSVImport: vi.fn().mockResolvedValue(mockPreviewResponse),
-    commitCSVImport: vi.fn().mockResolvedValue({
+    previewCSVImport: vi.fn().mockImplementation(() => Promise.resolve(mockPreviewResponse)),
+    commitCSVImport: vi.fn().mockImplementation(() => Promise.resolve({
       success: true,
       summary: {
         total: 2,
@@ -80,7 +80,7 @@ vi.mock('../../api/client', () => ({
         duplicates: 1,
         invalid: 0
       }
-    })
+    }))
   }
 }));
 
@@ -98,7 +98,7 @@ describe('CSVImportModal Component Suite', () => {
   });
 
   test('Upload file triggers preview API and displays Step 2 mapping & table', async () => {
-    render(<CSVImportModal isOpen={true} onClose={vi.fn()} />);
+    const { container } = render(<CSVImportModal isOpen={true} onClose={vi.fn()} />);
 
     const file = new File(
       ['Date,Merchant / Title,Amount\n2026-09-01,Starbucks,15.50'],
@@ -106,8 +106,7 @@ describe('CSVImportModal Component Suite', () => {
       { type: 'text/csv' }
     );
 
-    const browseBtn = screen.getByText(/Browse CSV File/i);
-    const fileInput = browseBtn.previousElementSibling as HTMLInputElement;
+    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
 
     // Simulate selecting file
     fireEvent.change(fileInput, { target: { files: [file] } });
@@ -116,12 +115,12 @@ describe('CSVImportModal Component Suite', () => {
       expect(screen.getByText(/Map CSV Columns to Finova Fields/i)).toBeInTheDocument();
     });
 
-    expect(screen.getByText('Starbucks Coffee')).toBeInTheDocument();
+    expect(screen.getAllByText('Starbucks Coffee').length).toBeGreaterThan(0);
     expect(screen.getByText(/Skip duplicate transactions/i)).toBeInTheDocument();
   });
 
   test('Navigates through confirmation step to final results step', async () => {
-    render(<CSVImportModal isOpen={true} onClose={vi.fn()} />);
+    const { container } = render(<CSVImportModal isOpen={true} onClose={vi.fn()} />);
 
     const file = new File(
       ['Date,Merchant / Title,Amount\n2026-09-01,Starbucks,15.50'],
@@ -129,8 +128,7 @@ describe('CSVImportModal Component Suite', () => {
       { type: 'text/csv' }
     );
 
-    const browseBtn = screen.getByText(/Browse CSV File/i);
-    const fileInput = browseBtn.previousElementSibling as HTMLInputElement;
+    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
 
     fireEvent.change(fileInput, { target: { files: [file] } });
 

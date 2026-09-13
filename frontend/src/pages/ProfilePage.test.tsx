@@ -1,15 +1,17 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, test, expect, vi, beforeEach } from 'vitest';
+import { BrowserRouter } from 'react-router-dom';
 import ProfilePage from './ProfilePage';
 
-// Mock dependecies
+// Mock dependencies
 const mockShowToast = vi.fn();
 vi.mock('../components/UI/Toast', () => ({
   useToast: () => ({ showToast: mockShowToast })
 }));
 
 const mockUpdateProfile = vi.fn();
+const mockDeleteAccount = vi.fn();
 const mockUser = {
   id: 'completed-user-id',
   name: 'Completed User',
@@ -30,9 +32,14 @@ const mockUser = {
 vi.mock('../store/authStore', () => ({
   default: () => ({
     user: mockUser,
-    updateProfile: mockUpdateProfile
+    updateProfile: mockUpdateProfile,
+    deleteAccount: mockDeleteAccount
   })
 }));
+
+const renderWithRouter = (ui: React.ReactElement) => {
+  return render(<BrowserRouter>{ui}</BrowserRouter>);
+};
 
 describe('ProfilePage Settings Editing Tests', () => {
   beforeEach(() => {
@@ -40,7 +47,7 @@ describe('ProfilePage Settings Editing Tests', () => {
   });
 
   test('Loads and displays all user database fields correctly', () => {
-    render(<ProfilePage />);
+    renderWithRouter(<ProfilePage />);
 
     expect(screen.getByText('Personal Profile')).toBeInTheDocument();
 
@@ -74,7 +81,7 @@ describe('ProfilePage Settings Editing Tests', () => {
   });
 
   test('Validates input rules and blocks updates with clean warnings', async () => {
-    render(<ProfilePage />);
+    renderWithRouter(<ProfilePage />);
 
     const nameInput = screen.getByDisplayValue('Completed User') as HTMLInputElement;
     fireEvent.change(nameInput, { target: { value: '' } });
@@ -87,7 +94,7 @@ describe('ProfilePage Settings Editing Tests', () => {
   });
 
   test('Submits structural modifications correctly to authStore API endpoints', async () => {
-    render(<ProfilePage />);
+    renderWithRouter(<ProfilePage />);
 
     const displayNameInput = screen.getByDisplayValue('Completed Display Name') as HTMLInputElement;
     fireEvent.change(displayNameInput, { target: { value: 'New Alias' } });

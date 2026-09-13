@@ -5,8 +5,8 @@ import {
   evaluateCreditCardAlerts,
   evaluateSpendingLimits,
   evaluateAllFinancialAlerts,
-} from '../services/alerts/alertEngine';
-import { prisma } from '../db/prisma';
+} from '../src/services/alerts/alertEngine';
+import { prisma } from '../src/db/prisma';
 
 describe('Spending Limits & Financial Alerts Engine Suite', () => {
   describe('Budget Threshold Alert Evaluations', () => {

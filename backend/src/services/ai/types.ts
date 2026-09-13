@@ -124,6 +124,7 @@ export interface InternalInsightResponse {
   limitations: string | null;
   charts: ChartConfig[];
   summary: any;
+  sources?: { filename: string; originalFilename: string; pageNumber: number | null; chunkId: string; similarity: number }[];
 }
 
 // RAG / Query Intent details

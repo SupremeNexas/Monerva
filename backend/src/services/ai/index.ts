@@ -8,8 +8,8 @@ export {
   GeminiVisionProvider,
   GeminiTextProvider,
   MockTextProvider
-} from './provider';
-export { executeRAGQuery } from './rag';
+} from './providers/provider';
+export { executeRAGQuery } from './rag/rag';
 export { getUserMemoryProfile } from './memory';
 export {
   generateSpendingInsights,
@@ -17,12 +17,16 @@ export {
   generateBudgetRecommendations,
   generateSpendingForecast,
   calculateFinancialHealthScore
-} from './coach';
+} from './assistant/coach';
 
 export { AIService } from './ai.service';
-export { FinancialInsightsService } from './financialInsights';
-export { IntentService } from './intent.service';
-export { QueryService } from './query.service';
-export { AnalysisService } from './analysis.service';
-export { ResponseService } from './response.service';
-export { BillScannerService } from './billScanner';
+export { FinancialInsightsService } from './assistant/financialInsights';
+export { IntentService } from './assistant/intent.service';
+export { QueryService } from './assistant/query.service';
+export { AnalysisService } from './assistant/analysis.service';
+export { ResponseService } from './assistant/response.service';
+export { BillScannerService } from './scanner/billScanner';
+export { DocumentService } from './documents/document.service';
+export { RAGService } from './rag/rag.service';
+export { getEmbeddingProvider, cosineSimilarity } from './embeddings/embeddings.service';
+export { searchSimilarChunks, checkPgvectorSupport } from './vectorstore/vectorStore';

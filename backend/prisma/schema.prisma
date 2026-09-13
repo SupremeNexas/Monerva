@@ -38,6 +38,10 @@ model User {
   // Subscription Plan / Entitlement
   plan                 String                 @default("FREE") @map("plan")
 
+  // Legal Consent & Terms Acceptance
+  termsAcceptedAt      DateTime?              @map("terms_accepted_at")
+  termsVersion         String?                @default("1.0") @map("terms_version")
+
   // Relations
   settings             Settings?
   wallets              Wallet[]
@@ -70,6 +74,10 @@ model User {
   // Friend balance relations
   friendBalancesFrom   FriendBalance[]        @relation("FriendFrom")
   friendBalancesTo     FriendBalance[]        @relation("FriendTo")
+
+  // Documents RAG Relations
+  documents            Document[]
+  documentChunks       DocumentChunk[]
 
   @@map("users")
 }
@@ -110,6 +118,8 @@ model Workspace {
   bills                 Bill[]
   automations           Automation[]
   auditLogs             AuditLog[]
+  documents             Document[]
+  documentChunks        DocumentChunk[]
 
   @@map("workspaces")
 }
@@ -535,4 +545,49 @@ model FriendBalance {
   @@index([fromUserId])
   @@index([toUserId])
   @@map("friend_balances")
+}
+
+model Document {
+  id               String          @id @default(uuid())
+  userId           String          @map("user_id")
+  workspaceId      String?         @map("workspace_id")
+  filename         String
+  originalFilename String          @map("original_filename")
+  mimeType         String          @map("mime_type")
+  size             Int
+  status           String          @default("PROCESSING") // PROCESSING, INDEXED, FAILED
+  errorMessage     String?         @map("error_message")
+  chunkCount       Int             @default(0) @map("chunk_count")
+  createdAt        DateTime        @default(now()) @map("created_at")
+  updatedAt        DateTime        @updatedAt @map("updated_at")
+
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace Workspace?       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  chunks    DocumentChunk[]
+
+  @@index([userId])
+  @@index([workspaceId])
+  @@map("documents")
+}
+
+model DocumentChunk {
+  id          String   @id @default(uuid())
+  documentId  String   @map("document_id")
+  userId      String   @map("user_id")
+  workspaceId String?  @map("workspace_id")
+  chunkIndex  Int      @map("chunk_index")
+  content     String   @db.Text
+  embedding   Json     // Array of 384 float values
+  metadata    Json?    // Page number, headers, numeric indicators, etc.
+  pageNumber  Int?     @map("page_number")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  document  Document   @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace Workspace? @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([documentId])
+  @@index([userId])
+  @@index([workspaceId])
+  @@map("document_chunks")
 }

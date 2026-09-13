@@ -61,6 +61,8 @@ router.post('/register', authLimiter, [
         authProvider: 'email',
         isVerified: true,
         lastLogin: new Date(),
+        termsAcceptedAt: new Date(),
+        termsVersion: '1.0',
         settings: {
           create: {
             theme: 'light',
@@ -298,6 +300,8 @@ router.post('/google', authLimiter, [
           authProvider: 'google',
           isVerified: true,
           lastLogin: new Date(),
+          termsAcceptedAt: new Date(),
+          termsVersion: '1.0',
           baseCurrency: 'INR',            // Default; user can change in settings
           settings: {
             create: {
@@ -526,6 +530,101 @@ router.post('/seed', authenticate, async (req: AuthenticatedRequest, res: Respon
   } catch (err) {
     console.error('Seeding error:', err);
     res.status(500).json({ error: 'Failed to seed demo data' });
+  }
+});
+
+// ─── DELETE /account (Account & Data Erasure) ─────────────────────────────────
+router.delete(['/account', '/me'], authenticate, async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+    const userId = req.user.id;
+
+    // Use Prisma transaction to atomically purge all user data
+    await prisma.$transaction(async (tx) => {
+      // 1. Documents & Vector chunks
+      await tx.documentChunk.deleteMany({ where: { userId } });
+      await tx.document.deleteMany({ where: { userId } });
+
+      // 2. Financial records & attachments
+      await tx.receipt.deleteMany({ where: { userId } });
+      await tx.transaction.deleteMany({ where: { userId } });
+      await tx.recurringTransaction.deleteMany({ where: { userId } });
+      await tx.subscription.deleteMany({ where: { userId } });
+      await tx.budget.deleteMany({ where: { userId } });
+
+      // Goals & contributions
+      const userGoals = await tx.goal.findMany({ where: { userId }, select: { id: true } });
+      const goalIds = userGoals.map(g => g.id);
+      if (goalIds.length > 0) {
+        await tx.goalContribution.deleteMany({ where: { goalId: { in: goalIds } } });
+      }
+      await tx.goal.deleteMany({ where: { userId } });
+
+      await tx.bill.deleteMany({ where: { userId } });
+      await tx.creditCard.deleteMany({ where: { userId } });
+      await tx.wallet.deleteMany({ where: { userId } });
+      await tx.category.deleteMany({ where: { userId } });
+
+      // 3. Social / Shared records
+      // Friend settlements, balances, and friendships
+      await tx.friendSettlement.deleteMany({
+        where: { OR: [{ paidById: userId }, { paidToId: userId }] }
+      });
+      await tx.friendBalance.deleteMany({
+        where: { OR: [{ fromUserId: userId }, { toUserId: userId }] }
+      });
+      await tx.friend.deleteMany({
+        where: { OR: [{ fromUserId: userId }, { toUserId: userId }] }
+      });
+
+      // Group expense splits & settlements involving user
+      await tx.groupExpenseSplit.deleteMany({ where: { userId } });
+      await tx.groupSettlement.deleteMany({
+        where: { OR: [{ paidById: userId }, { paidToId: userId }] }
+      });
+      await tx.groupExpense.deleteMany({ where: { paidById: userId } });
+
+      // Groups created by user
+      const createdGroups = await tx.group.findMany({
+        where: { createdBy: userId },
+        include: { members: true }
+      });
+      for (const group of createdGroups) {
+        await tx.groupSettlement.deleteMany({ where: { groupId: group.id } });
+        await tx.groupExpense.deleteMany({ where: { groupId: group.id } });
+        await tx.group.delete({ where: { id: group.id } });
+      }
+
+      // 4. Platform & Workspaces
+      await tx.notification.deleteMany({ where: { userId } });
+      await tx.auditLog.deleteMany({ where: { userId } });
+      await tx.settings.deleteMany({ where: { userId } });
+
+      // Workspaces where user is member / sole owner
+      const memberWorkspaces = await tx.workspaceMember.findMany({ where: { userId } });
+      const workspaceIds = memberWorkspaces.map(m => m.workspaceId);
+
+      await tx.workspaceMember.deleteMany({ where: { userId } });
+
+      for (const wsId of workspaceIds) {
+        const remainingMembers = await tx.workspaceMember.count({ where: { workspaceId: wsId } });
+        if (remainingMembers === 0) {
+          await tx.automation.deleteMany({ where: { workspaceId: wsId } });
+          await tx.workspace.delete({ where: { id: wsId } }).catch(() => {});
+        }
+      }
+
+      // 5. Delete User record
+      await tx.user.delete({ where: { id: userId } });
+    });
+
+    res.json({
+      success: true,
+      message: 'Your account and all associated personal financial data have been permanently deleted.'
+    });
+  } catch (err: any) {
+    console.error('[Account Deletion] Error purging user data:', err);
+    res.status(500).json({ error: 'Failed to delete account. Please try again or contact support.' });
   }
 });
 

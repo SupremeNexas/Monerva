@@ -1,6 +1,6 @@
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { prisma } from '../db/prisma';
+import { prisma } from '../src/db/prisma';
 import { Prisma } from '@prisma/client';
 
 describe('Transaction Search & Smart Filters - Authorization & Isolation Test Suite', () => {

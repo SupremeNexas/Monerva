@@ -20,7 +20,7 @@ import {
   FinancialInsightsService,
   VisionAIProvider
 } from '../services/ai';
-import { BillScannerService } from '../services/ai/billScanner';
+import { BillScannerService } from '../services/ai/scanner/billScanner';
 import {
   CATEGORIZE_SYSTEM_INSTRUCTION,
   getCategorizePrompt

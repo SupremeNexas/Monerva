@@ -1,8 +1,8 @@
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { prisma } from '../db/prisma';
+import { prisma } from '../src/db/prisma';
 import { Prisma } from '@prisma/client';
-import { parseCSV, parseFlexibleAmount, parseFlexibleDate, autoDetectMapping } from '../services/csv/csvService';
+import { parseCSV, parseFlexibleAmount, parseFlexibleDate, autoDetectMapping } from '../src/services/csv/csvService';
 
 describe('CSV Import & Export Service and Endpoint Test Suite', () => {
   const user1Id = 'user-csv-test-1';

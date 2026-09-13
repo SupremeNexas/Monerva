@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { 
-  Sparkles, Bot, Send, Trash2, Copy, Check, BarChart3, 
-  PieChart as PieIcon, LineChart as LineIcon, Receipt, ArrowRight, User
+import {
+  Sparkles, Bot, Send, Trash2, Copy, Check, BarChart3,
+  PieChart as PieIcon, LineChart as LineIcon, Receipt, ArrowRight, User, FileText
 } from 'lucide-react';
 import { api } from '../api/client';
 import { useToast } from '../components/UI/Toast';
@@ -20,18 +20,19 @@ interface Message {
   content: string;
   charts?: any[];
   transactions?: any[];
+  sources?: any[];
   summary?: any;
   isStreaming?: boolean;
 }
 
 const SUGGESTED_PROMPTS = [
   "How much did I spend this month?",
+  "What does my loan document say about prepayment?",
   "Compare this month and last month.",
   "Show my biggest purchases.",
   "Recommend a budget limit.",
   "Find recurring subscriptions.",
-  "Summarize this year's spending.",
-  "How much did I save?"
+  "Summarize this year's spending."
 ];
 
 // Curated colors matching design philosophy
@@ -84,7 +85,7 @@ export default function AIAssistantPage() {
       }),
     onSuccess: (res) => {
       const assistantMessageId = 'msg-' + Date.now();
-      
+
       // Add assistant response with isStreaming = true to trigger simulated typewriter stream
       setMessages(prev => [
         ...prev,
@@ -94,6 +95,7 @@ export default function AIAssistantPage() {
           content: res.answer || res.reply,
           charts: res.charts || [],
           transactions: res.transactions || [],
+          sources: res.sources || [],
           summary: res.summary || {},
           isStreaming: true
         }
@@ -296,6 +298,25 @@ export default function AIAssistantPage() {
                             {tx.type === 'INCOME' ? '+' : '-'}{formatCurrency(tx.amount, user?.baseCurrency)}
                           </span>
                         </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Render Document RAG Sources if present and text finished streaming */}
+                {!isUser && !msg.isStreaming && msg.sources && msg.sources.length > 0 && (
+                  <div className="premium-card p-3 space-y-2 mt-2 border-emerald-500/20 bg-emerald-500/[0.02]">
+                    <h4 className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 border-b border-emerald-500/10 pb-1">
+                      <FileText className="w-3.5 h-3.5" />
+                      Document Sources ({msg.sources.length})
+                    </h4>
+                    <div className="flex flex-wrap gap-2 text-[10px]">
+                      {msg.sources.map((src: any, idx: number) => (
+                        <span key={idx} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 font-medium border border-emerald-500/20">
+                          <FileText className="w-3 h-3 text-emerald-500" />
+                          <span>{src.originalFilename || src.filename}</span>
+                          {src.pageNumber ? <span className="text-emerald-600/70 font-semibold">(Page {src.pageNumber})</span> : null}
+                        </span>
                       ))}
                     </div>
                   </div>
