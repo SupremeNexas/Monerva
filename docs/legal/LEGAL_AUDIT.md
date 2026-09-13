@@ -1,51 +1,43 @@
-# Adversarial Legal, Privacy & Launch-Readiness Audit
+# Factual & Legal Document Audit Report
 
 **Audit Date:** September 13, 2026  
-**Auditor:** Automated Adversarial Legal & Security Audit Suite  
-**Final Status Recommendation:** **CONDITIONAL GO** (Release-blocked pending legal placeholder resolution)
+**Auditor:** Automated Factual & Legal Security Audit Suite  
+**Final Status Recommendation:** **CONDITIONAL GO** (Release-blocked pending legal placeholder resolution and human legal counsel review)
 
 ---
 
 ### Executive Summary
 
-An adversarial legal and privacy audit was performed on **Finova** to evaluate technical readiness, statutory compliance, privacy practices, and claim accuracy. 
+A factual and legal verification audit was performed on **Finova** to verify that all statements in `docs/legal/` align with actual backend/frontend code, database schemas, deployment configurations, and third-party API policies.
 
-While technical safeguards—including atomic data erasure across 15+ relations, tenant-isolated vector embeddings, and legal consent schema tracking—are fully operational and verified by automated tests, **public release must remain conditionally blocked** until required corporate entity details (`[LEGAL_ENTITY_NAME_REQUIRED]`) and formal legal counsel approvals are completed.
+While technical features—including atomic account deletion across 15+ relations, consent schema logging (`termsAcceptedAt`, `termsVersion`), local vector embedding generation (`@xenova/transformers`), prompt injection scrubbing, and tenant isolation—are implemented and verified by test suites, **public launch must remain conditionally blocked** until required corporate entity details (`[LEGAL_ENTITY_NAME_REQUIRED]`) and formal legal counsel reviews are completed.
 
 ---
 
-### Audit Findings & Technical Verification Matrix
+### Verification Matrix
 
-| Area | Status | Technical Implementation & Findings |
+| Legal Document / Subject | Verification Status | Code & Architecture Evidence |
 | :--- | :---: | :--- |
-| **Legal Consent Tracking** | **PASS** | Schema migration added `termsAcceptedAt` (`DateTime?`) and `termsVersion` (`String?`) to `User` model. Consent timestamps are captured during registration and profile updates. |
-| **Cascading Account Deletion** | **PASS** | `DELETE /api/auth/account` executes atomic transaction purging 15+ Prisma relations (transactions, documents, vector chunks, budgets, goals, social splits, audit logs, and user profile). |
-| **Authentication & Web Storage** | **VERIFIED** | Web storage policy transparently documents that session tokens (`fintech_token`, `fintech_refresh_token`) reside in browser `localStorage`. Inaccurate claims of `HttpOnly` cookies have been eliminated. |
-| **AI Data Processing & Safety** | **PASS** | Integration with Google Gemini API operates over encrypted TLS under Cloud API Privacy Terms (no model training). Local vector embeddings use `@xenova/transformers` in-process. RAG inputs are scrubbed of prompt injection attacks. |
-| **Marketing Claim Sanitization** | **PASS** | Removed all misleading references to "bank-grade security", "100% unhackable", "AES-256 protocols", and "99% guaranteed accuracy" across landing and UI pages. |
-| **Corporate Identity & Placeholders**| **BLOCKED** | Legal documents currently contain necessary placeholders (`[LEGAL_ENTITY_NAME_REQUIRED]`, `[REGISTERED_ADDRESS_REQUIRED]`, `[GRIEVANCE_OFFICER_NAME_REQUIRED]`). |
-
----
-
-### Data Retention & Deletion Reality Check
-
-- **Active Database:** Deletion is immediate, atomic, and complete across all active relational database tables.
-- **Cloud Disaster Recovery Backups:** Encrypted database snapshots retain historical data states for up to **30 days** in accordance with cloud provider backup retention schedules before automatic purge.
-- **Security Access Logs:** Server access logs (IP addresses, user agents) are retained for 30 days for operational diagnostic security auditing.
+| **Legal Consent Tracking** | **VERIFIED** | Prisma schema records `termsAcceptedAt` (`DateTime?`) and `termsVersion` (`String?`) on user creation and profile updates. |
+| **Cascading Account Deletion** | **VERIFIED** | `DELETE /api/auth/account` executes atomic Prisma transaction purging 15+ relations (transactions, documents, vector chunks, budgets, goals, social splits, notifications, audit logs, and user profile). |
+| **Web Storage & Tokens** | **VERIFIED** | `localStorage` handles session tokens (`fintech_token`, `fintech_refresh_token`, `fintech_workspace_id`, `fintech_chat_history`). No HTTP-only tracking cookies are set. |
+| **AI Data Processing & Safety** | **VERIFIED** | Local embeddings use `@xenova/transformers` in-process. Google Gemini API requests pass sanitized prompt contexts over TLS. Data retention claims are qualified per Google API terms. |
+| **Third-Party Inventory** | **VERIFIED** | Identified production processors: Vercel (frontend host), Render (backend host), PostgreSQL provider (database), Google OAuth 2.0 (auth), Google Gemini API (AI services). |
+| **Corporate Entity Placeholders**| **BLOCKED** | Retained necessary placeholders (`[LEGAL_ENTITY_NAME_REQUIRED]`, `[REGISTERED_ADDRESS_REQUIRED]`, `[GRIEVANCE_OFFICER_NAME_REQUIRED]`, `[CONTACT_EMAIL_REQUIRED]`). |
 
 ---
 
 ### Pre-Launch Blocking Dependencies
 
-Before changing the status from **CONDITIONAL GO** to **FINAL GO**:
-1. Replace `[LEGAL_ENTITY_NAME_REQUIRED]` across all documents in `docs/legal/` with the registered corporate entity name.
-2. Replace `[REGISTERED_ADDRESS_REQUIRED]` with the physical corporate registered office address.
-3. Appoint and publish the details of the designated `[GRIEVANCE_OFFICER_NAME_REQUIRED]`.
-4. Obtain formal legal sign-off from qualified financial regulatory counsel in target deployment jurisdictions.
+Before updating the status from **CONDITIONAL GO** to **FINAL GO**:
+1. Replace `[LEGAL_ENTITY_NAME_REQUIRED]` across all documents in `docs/legal/` with the registered business entity name.
+2. Replace `[REGISTERED_ADDRESS_REQUIRED]` with the official physical corporate registered address.
+3. Appoint and publish details for `[GRIEVANCE_OFFICER_NAME_REQUIRED]` and `[CONTACT_EMAIL_REQUIRED]`.
+4. Obtain formal legal sign-off from qualified legal counsel in target operating jurisdictions.
 
 ---
 
 ### Final Recommendation
 
 **CONDITIONAL GO**  
-*Technical implementation is verified and launch-ready; public commercial deployment is conditioned on completing corporate entity fill-ins and legal counsel sign-off.*
+*Technical implementation is verified and launch-ready; public commercial deployment is conditioned on completing corporate entity fill-ins and human legal counsel sign-off.*

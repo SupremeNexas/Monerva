@@ -23,6 +23,6 @@ The following bracketed placeholders in `docs/legal/` and frontend pages must be
 ### 2. Regulatory & Legal Counsel Verification
 
 - [ ] **Financial Regulator Exemption Review:** Confirm that Finova's self-directed ledger features remain exempt from banking/NBFC licensing in your target operating jurisdictions.
-- [ ] **Data Protection Compliance:** Obtain formal legal sign-off under local privacy laws (e.g., GDPR, CCPA/CPRA, India DPDP Act 2023).
+- [ ] **Data Protection Compliance:** Obtain formal legal sign-off under applicable local privacy laws (e.g., GDPR, CCPA/CPRA, India DPDP Act 2023).
 - [ ] **Terms Acceptance Flow:** Ensure explicit clickwrap consent is collected on registration and major terms revisions.
 - [ ] **Insurance & Commercial Liability:** Verify commercial general liability and cyber insurance policies cover AI software tools.

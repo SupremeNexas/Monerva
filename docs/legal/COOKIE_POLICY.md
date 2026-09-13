@@ -2,32 +2,38 @@
 
 **Last Updated:** September 13, 2026
 
-This Policy describes how **Finova** (`[LEGAL_ENTITY_NAME_REQUIRED]`) uses browser cookies and local web storage.
+This Policy describes how **Finova** (`[LEGAL_ENTITY_NAME_REQUIRED]`) utilizes browser web storage.
 
 ---
 
-### 1. No Third-Party Tracking Cookies
+### 1. Cookies Disclosure
 
-Finova does **not** deploy third-party tracking cookies, advertising beacons, marketing pixels, or analytics trackers (such as Google Analytics or Facebook Pixel). We do not track your browsing activity across third-party websites.
-
----
-
-### 2. Browser Local Storage Usage
-
-Rather than traditional server cookies, Finova uses client browser `localStorage` to preserve user session state across page updates in our single-page web application.
-
-#### 2.1 Essential Web Storage Keys
-- `fintech_token`: Json Web Token (JWT) bearer token used to authenticate REST API requests.
-- `fintech_refresh_token`: Secure refresh token string used to request updated access tokens upon expiration.
-
-#### 2.2 Security Disclosures regarding Web Storage
-Unlike cookies marked with `HttpOnly` flags, items saved in `localStorage` can be read by client-side JavaScript executing in the browser origin context. To mitigate risk:
-- All communications are enforced via TLS/HTTPS encryption.
-- Tokens carry limited lifetimes and are bound to your user session.
-- Users should access Finova on trusted personal devices and maintain updated web browsers.
+Finova does not set third-party tracking cookies, advertising pixels, or marketing beacons. Finova does not track user browsing activity across external websites.
 
 ---
 
-### 3. Managing Web Storage
+### 2. Browser Local Storage Inventory
 
-You can inspect or clear `localStorage` items at any time through your browser's developer tools or settings. Logging out of Finova automatically clears stored authentication tokens from your browser's `localStorage`.
+Finova uses browser local storage (`localStorage`) to maintain client application state across page refreshes:
+
+| Key Name | Category | Purpose |
+| :--- | :--- | :--- |
+| `fintech_token` | Essential | Bearer JSON Web Token (JWT) used to authorize REST API requests |
+| `fintech_refresh_token` | Essential | Refresh token string used to obtain new access tokens upon expiration |
+| `fintech_workspace_id` | Preference | Stores active workspace context selection |
+| `fintech_chat_history` | UI State | Locally caches recent AI assistant conversation messages |
+
+---
+
+### 3. Security Disclosures regarding Web Storage
+
+Unlike cookies configured with `HttpOnly` attributes, items stored in browser `localStorage` are accessible to JavaScript executing in the application origin. To mitigate risk:
+- API communications are transmitted over TLS/HTTPS encryption.
+- Authentication tokens carry explicit expiration limits.
+- Users are advised to access Finova from secure, private devices and maintain updated web browsers.
+
+---
+
+### 4. Managing Web Storage
+
+Users can inspect or clear browser `localStorage` items at any time through browser developer tools or settings. Logging out of Finova removes stored authentication token keys (`fintech_token`, `fintech_refresh_token`, `fintech_workspace_id`) from local web storage.

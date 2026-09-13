@@ -35,7 +35,7 @@ export default function CookiePage() {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white uppercase tracking-wider">1. What Storage Technologies We Use</h2>
             <p>
-              Finova utilizes browser <code>localStorage</code> and HTTP-only session cookies to maintain your login session across page refreshes and secure API transactions.
+              Finova utilizes browser <code>localStorage</code> to maintain your login session across page refreshes and authorize REST API requests. Finova does not set HTTP-only tracking or session cookies.
             </p>
           </section>
 

@@ -11,38 +11,44 @@ This document outlines data flows, storage locations, third-party processing bou
 ```
 [ User Browser ]
    │
-   ├─► Client Authentication (JWT stored in browser localStorage)
+   ├─► Client Web Storage (JWT tokens in browser localStorage)
    │
    ▼ TLS / HTTPS (Encrypted in transit)
-[ Express API Server ]
+[ Vercel Frontend Edge ]
+   │
+   ▼ Proxies /api/* requests to Render
+[ Render Express Backend API ]
    │
    ├─► Authentication & Tenant Scoping (userId, workspaceId verification)
-   ├─► Prompt Injection Sanitization (Input text scrubbing)
+   ├─► Input Scrubbing (Prompt injection sanitization)
    │
    ├───────────► [ Google Gemini API ] (Over TLS)
    │               - Receipt image OCR extraction
-   │               - RAG conversational assistant responses
-   │               - Governed by Google Cloud API Privacy (No model training)
+   │               - RAG assistant query context responses
+   │               - Policy governed by Google Gemini API Terms (per operator API tier)
    │
    ├───────────► [ Local @xenova/transformers ] (In-memory on backend)
-   │               - Generates 384-dimensional vector embeddings
+   │               - Computes 384-dimensional vector embeddings
    │
    ▼ Prisma ORM
-[ PostgreSQL Database ]
+[ PostgreSQL Database Provider ]
    - User Accounts & Legal Consent Timestamps (termsAcceptedAt, termsVersion)
-   - Encrypted Password Hashes (bcrypt)
-   - Transactions, Budgets, Wallets, Goals
-   - Encrypted Document Chunks & Local Vector Embeddings
+   - Password Hashes (bcrypt)
+   - Transactions, Budgets, Wallets, Goals, Categories
+   - Document Vault Metadata & Local Vector Embeddings (document_chunks)
 ```
 
 ---
 
-### 2. Third-Party Data Processors
+### 2. Third-Party Data Processors Inventory
 
-| Processor | Purpose | Data Transmitted | Privacy Safeguards |
+| Processor | Platform Role | Data Transmitted / Stored | Data Handling & Privacy Safeguards |
 | :--- | :--- | :--- | :--- |
-| **Google Gemini API** | Receipt OCR & Financial Assistant | Receipt images, sanitized prompt queries | Cloud API Privacy Terms; payload data not retained for model training |
-| **Google OAuth 2.0** | Third-party user authentication | Email, display name, profile avatar URL | Standard OAuth 2.0 authorization code grant flow |
+| **Vercel** | Frontend Hosting & Edge Proxy | Client IP address, user agent, static asset requests | Serves compiled React web application bundle and proxies `/api/*` endpoints to Render |
+| **Render** | Backend API Application Server | API request payloads, auth tokens, uploaded receipt/PDF files in transit, server execution logs | Executes Node.js/Express backend logic and handles database ORM queries |
+| **PostgreSQL Provider** | Relational Database Storage | User profiles, password hashes (bcrypt), financial ledgers, budgets, document metadata, vector embeddings | Persistent relational database storage (Render PostgreSQL / Supabase / Neon / self-hosted per operator deployment) |
+| **Google OAuth 2.0** | Third-Party Authentication | OAuth authorization code, email, display name, profile avatar URL | Standard OAuth 2.0 user authentication flow |
+| **Google Gemini API** | Receipt OCR & AI Assistant | Receipt images, sanitized prompt query strings | API requests transmitted over TLS; data retention governed by Google Cloud / Gemini API terms for configured tier |
 
 ---
 
@@ -50,8 +56,8 @@ This document outlines data flows, storage locations, third-party processing bou
 
 | Data Type | Storage Location | Protection Mechanism |
 | :--- | :--- | :--- |
-| **Session Credentials** | Browser `localStorage` | Bearer JWT; restricted scope |
-| **User Passwords** | PostgreSQL Database | Bcrypt password hashing (salt round 10+) |
+| **Session Credentials** | Browser `localStorage` | Bearer JWT (`fintech_token`, `fintech_refresh_token`) |
+| **User Passwords** | PostgreSQL Database | Bcrypt password hashing (salt round 10) |
 | **Ledger & Document Data**| PostgreSQL Database | Logical tenant isolation (`userId`, `workspaceId`) |
 | **Vector Embeddings** | PostgreSQL Database (`document_chunks` table) | In-process generation (`@xenova/transformers`), strict tenant filtering |
-| **Database Backups** | Cloud Provider Encrypted Storage | AES-256 backup encryption; 30-day auto-purge retention schedule |
+| **Database Backups** | Database Provider Storage | Automated backup snapshots per database provider configuration |

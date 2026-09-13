@@ -2,71 +2,87 @@
 
 **Last Updated:** September 13, 2026
 
-`[LEGAL_ENTITY_NAME_REQUIRED]` ("Company", "we", "us", or "our") respects your privacy and is committed to protecting the personal data you share with us when using **Finova** (the "Service").
+`[LEGAL_ENTITY_NAME_REQUIRED]` ("Company", "we", "us", or "our") respects your privacy and describes herein how personal data is handled within **Finova** (the "Service").
 
 ---
 
-### 1. Information We Collect
+### 1. Information Collected and Stored
 
-#### 1.1 Information You Provide directly
+#### 1.1 Information You Provide Directly
 - **Account Information:** Full name, preferred display name, email address, avatar URL, base currency, country, and timezone.
-- **Financial Ledger Data:** Self-reported income bracket, financial goals, custom budget limits, category names, transaction amounts, dates, notes, and merchant names.
-- **Document & Receipt Uploads:** Receipt image files (PNG, JPG) and document PDFs uploaded to your personal vault.
+- **Financial Ledger Data:** Income bracket, financial goals, custom budget limits, category names, transaction amounts, dates, notes, and merchant names.
+- **Document & Receipt Uploads:** Receipt image files (PNG, JPG) and document PDFs uploaded to your financial vault.
 - **Legal Consent Logs:** Consent timestamps (`termsAcceptedAt`) and terms version strings (`termsVersion`).
 
-#### 1.2 Information Automatically Collected
-- **Browser Web Storage:** Access tokens (`fintech_token`) and refresh tokens (`fintech_refresh_token`) stored in your browser's `localStorage` to maintain session state.
-- **Technical Logs:** Standard server request logs (IP address, user agent, endpoint access timestamps) recorded for security monitoring and operational diagnostic logging.
+#### 1.2 Information Stored in Browser Web Storage
+Finova uses browser `localStorage` to maintain application state:
+- `fintech_token`: JWT bearer access token for API authorization.
+- `fintech_refresh_token`: Token string used to refresh access tokens upon expiration.
+- `fintech_workspace_id`: Active workspace preference selection.
+- `fintech_chat_history`: Locally cached AI assistant message history.
 
-#### 1.3 Data We DO NOT Collect or Store
-We strictly do **NOT** request, collect, process, or store:
+#### 1.3 Technical Server Logs
+Application hosting servers record standard operational log entries (including client IP address, user-agent header, and request path/timestamp) for security monitoring and runtime diagnostic purposes.
+
+#### 1.4 Credentials Not Collected
+Finova does not request, collect, or store:
 - Bank account passwords or netbanking PINs
-- Credit/debit card numbers, CVVs, or expiration dates
+- Credit/debit card CVV codes or PINs
 - UPI PINs or One-Time Passwords (OTPs)
-- Government identification credentials (e.g., Aadhaar, SSN, PAN, Passport numbers)
+- Government identification numbers (such as Aadhaar, SSN, or Tax IDs)
 
 ---
 
-### 2. How We Use Your Information
+### 2. Purposes of Processing
 
-We use collected information solely for the following business purposes:
-1. Providing, operating, and maintaining your personal expense tracking ledger and budget analytics.
-2. Generating local vector embeddings of uploaded financial documents to enable semantic search within your isolated account context.
-3. Extracting merchant, date, and amount details from uploaded receipt images via AI services.
-4. Enforcing tenant isolation and verifying legal consent.
-5. Responding to technical support requests and managing security audit logs.
-
----
-
-### 3. Third-Party Integrations & Data Transfers
-
-3.1 **Google Gemini API (AI Services):** When you upload receipts for optical recognition or submit queries to the financial assistant, relevant text/images are transmitted over encrypted TLS connections to the Google Gemini API. Data processed via Google Cloud API endpoints is governed by Google Cloud API Privacy Terms, which specify that customer API payload data is **not** used to train foundation models.
-
-3.2 **Local Embedding Generation:** Document chunk text embeddings are computed locally on the application server using `@xenova/transformers` (384-dimensional vectors) and stored directly in your PostgreSQL database tenant scope. They are not transmitted to external third-party vector databases.
-
-3.3 **No Data Sale:** We do **not** sell, rent, trade, or monetize your personal or financial data to data brokers, advertisers, or third parties.
+Collected information is processed for the following operational purposes:
+1. Providing personal expense ledger features, budget analytics, and transaction categorization.
+2. Computing local vector embeddings of uploaded vault documents (`@xenova/transformers`) to support in-app semantic document search.
+3. Extracting transaction values from receipt images via AI service integrations.
+4. Managing workspace permissions, tenant isolation, and legal consent logging.
+5. Operating security audit logs and supporting technical troubleshooting.
 
 ---
 
-### 4. Client Web Storage Reality
+### 3. Third-Party Data Processors Inventory
 
-Finova uses browser `localStorage` for maintaining client-side authentication sessions (`fintech_token` and `fintech_refresh_token`). While `localStorage` facilitates seamless single-page application navigation, it does not carry `HttpOnly` cookie protections. Users are advised to access Finova only on secure, private devices and to keep web browsers updated against XSS vulnerabilities.
+The following external infrastructure and third-party service providers process data in connection with Finova:
+
+| Processor | Platform Role | Data Transmitted / Stored | Data Handling & Privacy Safeguards |
+| :--- | :--- | :--- | :--- |
+| **Vercel** | Frontend Hosting & Edge Routing | Browser HTTP headers, IP address, static frontend asset requests | Governed by Vercel Privacy Notice; serves client web assets |
+| **Render** | Backend API Application Server | API request payloads, auth tokens, uploaded receipt/PDF files in transit, server execution logs | Governed by Render Privacy Policy; executes application backend logic |
+| **PostgreSQL Provider** | Relational Database Storage | User profiles, encrypted password hashes (bcrypt), ledgers, budgets, document metadata, document chunk embeddings | Database hosting provider (Render PostgreSQL / Supabase / Neon / self-hosted) per operator configuration |
+| **Google OAuth 2.0** | Third-Party Authentication | OAuth authorization codes, email, display name, profile avatar URL | Governed by Google Privacy Policy; standard OAuth 2.0 identity verification |
+| **Google Gemini API** | Receipt OCR & AI Assistant | Receipt images, sanitized prompt query strings | Transmitted over TLS; data retention and training rules depend on Google Cloud / Gemini API terms for the operator's configured API tier |
 
 ---
 
-### 5. Data Retention & Permanent Deletion
+### 4. Browser Local Storage Security Disclosures
 
-5.1 **Active Database Erasure:** When you execute account deletion via your Profile Settings, all associated records in the active PostgreSQL database—including user credentials, transaction ledgers, uploaded documents, document chunks, budgets, goals, and notifications—are immediately and transactionally deleted.
+Finova uses browser `localStorage` rather than HTTP-only cookies for authentication session state. Items saved in `localStorage` can be read by JavaScript code executing within the application origin. To mitigate security risks:
+- API communications require HTTPS/TLS encryption.
+- Tokens carry explicit expiration limits.
+- Users are advised to access Finova from secure devices and maintain updated web browser software.
 
-5.2 **Cloud Backup Retention Schedule:** Encrypted database backup snapshots and system logs maintained for disaster recovery purposes naturally overwrite and expire according to a **30-day cloud provider retention schedule**. After 30 days, backup snapshots containing prior database states are permanently purged.
+---
+
+### 5. Data Retention & Account Deletion
+
+5.1 **Active Database Erasure:** Executing account deletion via Profile Settings triggers an atomic database transaction (`DELETE /api/auth/account`) that deletes active relational records associated with your user ID (user profile, transactions, budgets, goals, document chunks, receipts, and user settings).
+
+5.2 **Distinction Across Data Stores:**
+- **Active Database:** Purged immediately upon user-initiated account deletion.
+- **Provider Backup Snapshots:** Disaster recovery snapshots created by the database hosting provider are retained according to the provider's automated backup lifecycle and retention schedule.
+- **Server Access Logs:** Operational HTTP logs on hosting platforms (Render/Vercel) are retained per platform log retention policies.
+- **Third-Party API Logs:** Processing logs generated by external API services (e.g. Google Gemini API) are subject to third-party provider log retention schedules.
 
 ---
 
 ### 6. Contact & Grievance Redressal
 
-If you have questions, concerns, or requests regarding this Privacy Policy or data protection, please contact our designated Grievance Officer:
-
+For privacy inquiries or grievance redressal, contact:
 - **Legal Entity:** `[LEGAL_ENTITY_NAME_REQUIRED]`
 - **Registered Address:** `[REGISTERED_ADDRESS_REQUIRED]`
 - **Grievance Officer:** `[GRIEVANCE_OFFICER_NAME_REQUIRED]`
-- **Email:** privacy@example.com (or `[CONTACT_EMAIL_REQUIRED]`)
+- **Contact Email:** `[CONTACT_EMAIL_REQUIRED]`
