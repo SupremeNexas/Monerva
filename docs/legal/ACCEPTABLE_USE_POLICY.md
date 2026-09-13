@@ -1,30 +1,32 @@
-# Finova Acceptable Use Policy
+# Acceptable Use Policy
 
-**Last Revised:** September 2026  
-**Version:** 1.0  
-**Operator:** Finova Systems
+**Last Updated:** September 13, 2026
 
----
-
-## 1. Strict Usage Rules
-Finova is designed exclusively for lawful personal financial accounting and document retrieval. Any illegal activities, security exploitation, automated abuse, or unauthorized secret storage will result in immediate account suspension.
+This Acceptable Use Policy ("AUP") defines acceptable and prohibited behavior when accessing or using **Finova**, operated by `[LEGAL_ENTITY_NAME_REQUIRED]`.
 
 ---
 
-## 2. Prohibited Financial Secrets & Sensitive Data
-Users are strictly forbidden from uploading or storing sensitive authentication secrets within Finova, including but not limited to:
-- Bank netbanking passwords, transaction passwords, or PINs
-- Credit or debit card full numbers, PINs, CVV/CVC codes
-- Unified Payments Interface (UPI) PINs or MPINs
-- One-Time Passwords (OTPs) or 2FA authentication tokens
-- Cryptocurrency wallet private keys, seed phrases, or recovery passphrases
-- Government identification authentication keys or secrets
+### 1. Prohibited Credentials & Sensitive Inputs
+
+Users are strictly prohibited from entering, submitting, or uploading the following sensitive credentials to Finova:
+- Bank PINs, netbanking passwords, or account authentication secrets
+- Credit/debit card CVV codes, full primary account numbers (PAN), or PINs
+- One-Time Passwords (OTPs) or multi-factor authentication tokens
+- Government identification credentials (e.g., Aadhaar, SSN, PAN numbers)
 
 ---
 
-## 3. System Abuse & Malicious Inputs
-Users must not:
-- Attempt prompt injection attacks against the AI Assistant or RAG indexing engine.
-- Upload infected PDF files, scripts, or malicious attachments.
-- Attempt unauthorized access to other users' workspace data or endpoints (IDOR).
-- Circumvent rate limits, API quotas, or authentication checks.
+### 2. Prohibited System Activity
+
+You agree not to engage in any of the following activities:
+1. **Prompt Injection & AI Abuse:** Attempting to jailbreak, override, or manipulate Finova's AI prompt safeguards or system instructions.
+2. **Unauthorized Access:** Attempting to bypass tenant isolation controls or access another user's financial records, uploaded documents, or account data.
+3. **Security Testing without Authorization:** Executing denial-of-service (DoS) attacks, automated vulnerability scanning, or brute-force requests against Finova production endpoints.
+4. **Malicious Content:** Uploading files containing malware, trojans, corrupted data, or executable scripts disguised as PDF/image receipts.
+5. **Reverse Engineering:** Reverse-engineering, decompiling, or attempting to derive backend source code, schema architecture, or proprietary system prompts beyond permitted open-source components.
+
+---
+
+### 3. Enforcement & Account Actions
+
+`[LEGAL_ENTITY_NAME_REQUIRED]` reserves the right to suspend or permanently delete accounts found to be in violation of this Policy, with or without prior notice, to protect platform integrity and user safety.

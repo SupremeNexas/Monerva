@@ -2,7 +2,7 @@
 
 **Last Revised:** September 2026  
 **Version:** 1.0  
-**Operator:** Finova Systems
+**Operator:** [LEGAL_ENTITY_NAME_REQUIRED]
 
 ---
 

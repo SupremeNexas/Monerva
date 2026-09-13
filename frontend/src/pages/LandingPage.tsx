@@ -640,11 +640,11 @@ export default function LandingPage() {
                 {[
                   {
                     q: "How does the AI receipt scanning work?",
-                    a: "Our AI scans receipts, identifies vendors, extracts dates, line items, tax details, and automatically categorizes the transactions into your ledger with 99% accuracy."
+                    a: "Our AI processes receipt images to extract vendor names, dates, amounts, and category suggestions to simplify ledger entry."
                   },
                   {
-                    q: "Is my bank-grade financial data secure?",
-                    a: "Yes. All database elements run under strict logical isolation. We employ transport-layer security and AES-256 standard cryptographic protocols."
+                    q: "How is my financial data protected?",
+                    a: "We implement standard HTTPS transport encryption, user authentication, and database tenant isolation to safeguard user accounts."
                   },
                   {
                     q: "Does Finova support multiple currencies?",
@@ -726,7 +726,7 @@ export default function LandingPage() {
                 <p className="text-xs text-slate-500 mt-2 max-w-sm">Secure SaaS accounting ledgers designed with absolute logical isolation.</p>
               </div>
               <div className="text-[10px] text-slate-655 mt-6 md:mt-24 font-mono">
-                &copy; 2026 Finova Systems. All rights reserved.
+                &copy; 2026 [LEGAL_ENTITY_NAME_REQUIRED]. All rights reserved.
               </div>
             </div>
 

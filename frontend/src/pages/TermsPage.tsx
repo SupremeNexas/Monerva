@@ -108,7 +108,7 @@ export default function TermsPage() {
         </main>
 
         <footer className="mt-8 text-center text-xs text-slate-500">
-          Last revised: September 2026. Version 1.0. Finova Systems.
+          Last revised: September 2026. Version 1.0. [LEGAL_ENTITY_NAME_REQUIRED].
         </footer>
       </div>
     </div>

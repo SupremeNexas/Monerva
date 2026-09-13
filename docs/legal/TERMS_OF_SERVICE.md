@@ -1,60 +1,69 @@
-# Finova Terms of Service
+# Terms of Service
 
-**Last Revised:** September 2026  
-**Version:** 1.0  
-**Operator:** Finova Systems
+**Last Updated:** September 13, 2026
 
----
+Welcome to **Finova**, a personal finance tracking and ledger platform operated by `[LEGAL_ENTITY_NAME_REQUIRED]` ("Company", "we", "us", or "our").
 
-## Important Notice & Service Scope
-Finova is a personal financial ledger and information management software tool. Finova is **NOT** a bank, non-banking financial company (NBFC), payment system operator, money transmitter, or licensed financial advisor. Finova does not hold customer funds, execute money transfers, or provide professional investment advice.
+By accessing or using Finova (the "Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, you may not access or use the Service.
 
 ---
 
-## 1. Agreement to Terms
-By registering an account, accessing, or using Finova, you agree to be bound by these Terms of Service, our Privacy Policy, Acceptable Use Policy, and AI Disclaimer. If you do not agree to these terms, you must not use the application.
+### 1. Corporate Identity & Regulatory Disclaimers
+
+1.1 **Operating Entity:** Finova is operated by `[LEGAL_ENTITY_NAME_REQUIRED]`, having its registered address at `[REGISTERED_ADDRESS_REQUIRED]`.
+
+1.2 **Non-Regulated Status:** Finova is an informational software utility designed solely for self-directed personal expense tracking, budgeting, and financial organization. Finova is **not** a bank, non-banking financial company (NBFC), payment gateway, payment aggregator, wealth management advisor, or regulated financial institution under any jurisdiction.
+
+1.3 **No Banking Credentials:** Finova does **not** connect directly to banking core systems, nor does it request, collect, process, or store sensitive payment or banking authentication credentials. You must **never** enter or upload:
+- Bank PINs or netbanking passwords
+- Credit card CVVs or expiration codes
+- UPI PINs or OTPs (One-Time Passwords)
+- Government identification numbers (such as Aadhaar, SSN, or Tax IDs)
 
 ---
 
-## 2. Eligibility & Account Responsibilities
-You must be at least 18 years of age (or the legal age of majority in your jurisdiction) to register an account. You are responsible for maintaining the confidentiality of your authentication credentials (including email/password combinations and Google OAuth sessions) and for all activities that occur under your account.
+### 2. User Accounts & Registration
+
+2.1 **Registration:** You must register an account using a valid email address or authenticated third-party sign-in provider (e.g., Google OAuth 2.0). You are responsible for maintaining the confidentiality of your login credentials.
+
+2.2 **Age Requirements:** You represent that you are at least 18 years old or the age of legal majority in your jurisdiction to use this Service.
+
+2.3 **Acceptance Recording:** When you register an account or update your profile, we record your explicit consent, including timestamp (`termsAcceptedAt`) and version (`termsVersion`).
 
 ---
 
-## 3. Record-Keeping vs Monetary Settlement
-Finova provides manual and automated record-keeping features, including transaction logging, budget tracking, subscription alerts, friend debt calculations, group expense splitting, and receipt scanning. All calculations and balances displayed within Finova are for information tracking purposes only. Finova does not process payment transactions or transfer funds between accounts or users. Actual debt settlements must be executed independently outside the software.
+### 3. Financial Information & AI Features
+
+3.1 **Informational Use Only:** All summaries, charts, categorization suggestions, budget warnings, and AI-generated responses provided by Finova are for informational and organizational purposes only.
+
+3.2 **No Professional Advice:** Finova does not provide investment, tax, legal, or formal accounting advice. Users must consult qualified professional advisors before making financial or investment decisions based on Service outputs.
+
+3.3 **AI Technology & Third-Party Processing:** Finova integrates third-party AI services, including Google Gemini API, to assist with document text extraction, receipt scanning, and context-aware responses. Input data provided to AI features (such as receipt images or text queries) is processed under Google's Cloud API Privacy Terms and is not used to train global public AI models.
 
 ---
 
-## 4. Artificial Intelligence & Document RAG Services
-Finova incorporates AI features, including receipt OCR processing (via Google Gemini Vision) and Financial Document Vault retrieval (via local text embeddings and Gemini text generation).
+### 4. Account Termination & Data Erasure
 
-- **OCR & Scanning Accuracy:** AI-extracted values from receipts or bills are automated suggestions and may contain errors. You are strictly required to verify merchant names, dates, taxes, and amounts before saving transactions.
-- **Document Vault Uploads:** PDF documents uploaded into the Financial Vault are processed, chunked, and stored as vector embeddings in our database to enable document search. You retain ownership of all uploaded content.
-- **Prompt Injection Prohibitions:** You agree not to upload malicious documents or craft inputs designed to bypass system safety controls or extract unauthorized contextual data.
+4.1 **User Termination:** You may terminate your account at any time via your Profile Settings by executing the account deletion flow.
 
----
+4.2 **Data Purge:** Executing account deletion immediately and permanently purges your user profile, transaction ledgers, uploaded documents, vector embeddings, and budgets from our active database. Backup retention is governed by our [Data Deletion Policy](DATA_DELETION_POLICY.md).
 
-## 5. Prohibited Financial Secrets
-You must **NEVER** input, upload, or transmit sensitive authentication credentials into Finova, including: bank passwords, netbanking PINs, UPI PINs, credit/debit card PINs, CVV/CVC numbers, OTPs, seed phrases, private keys, or national identity authentication secrets (e.g. Aadhaar OTP/PAN credentials). Finova will never request or store these secrets.
+4.3 **Company Termination:** We reserve the right to suspend or terminate accounts that violate our [Acceptable Use Policy](ACCEPTABLE_USE_POLICY.md).
 
 ---
 
-## 6. Account Termination & Data Erasure
-You may terminate your account at any time via the Profile settings page. Choosing "Delete Account" initiates an immediate, atomic erasure of your personal data, transaction ledgers, uploaded documents, vector chunks, and AI conversation context from our active database.
+### 5. Limitation of Liability & Warranty Disclaimer
+
+5.1 **"AS IS" Basis:** The Service is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, whether express, implied, or statutory.
+
+5.2 **Limitation:** To the maximum extent permitted by law, `[LEGAL_ENTITY_NAME_REQUIRED]` shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues resulting from your use of or inability to use the Service.
 
 ---
 
-## 7. Limitation of Liability
-To the maximum extent permitted by applicable law, Finova and its operators shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, arising out of your access to or use of the application, AI-generated outputs, or manual data inputs.
+### 6. Contact Information
 
----
-
-## 8. Governing Law & Dispute Resolution
-These Terms shall be governed by and construed in accordance with applicable legal frameworks.
-
----
-
-## 9. Grievance & Support Contact
-For legal inquiries, terms compliance, or privacy grievances, please contact our designated team:
-- **Contact Email:** `grievance@finova.app`
+For legal inquiries or notices, contact:
+- **Legal Entity:** `[LEGAL_ENTITY_NAME_REQUIRED]`
+- **Registered Address:** `[REGISTERED_ADDRESS_REQUIRED]`
+- **Grievance Officer:** `[GRIEVANCE_OFFICER_NAME_REQUIRED]`
+- **Contact Email:** legal@example.com (or `[CONTACT_EMAIL_REQUIRED]`)
