@@ -59,7 +59,7 @@ export const TurnstileWidget = forwardRef<TurnstileWidgetRef, TurnstileWidgetPro
 
   useImperativeHandle(ref, () => ({
     reset: () => {
-      const isTestEnv = import.meta.env.MODE === 'test' || (typeof window.turnstile === 'undefined' && process.env.NODE_ENV === 'test');
+      const isTestEnv = import.meta.env.MODE === 'test' || (typeof window.turnstile === 'undefined' && typeof process !== 'undefined' && process.env?.NODE_ENV === 'test');
       if (isTestEnv) {
         setStatus('verified');
         setErrorMessage(null);
@@ -135,7 +135,7 @@ export const TurnstileWidget = forwardRef<TurnstileWidgetRef, TurnstileWidgetPro
 
   useEffect(() => {
     // If in automated test environment (JSDOM / Vitest) where script cannot load from Cloudflare CDN
-    const isTestEnv = import.meta.env.MODE === 'test' || typeof window.turnstile === 'undefined' && process.env.NODE_ENV === 'test';
+    const isTestEnv = import.meta.env.MODE === 'test' || (typeof window.turnstile === 'undefined' && typeof process !== 'undefined' && process.env?.NODE_ENV === 'test');
     if (isTestEnv) {
       setStatus('verified');
       onSuccess('test-valid-token');
