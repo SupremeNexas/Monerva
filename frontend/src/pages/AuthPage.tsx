@@ -455,14 +455,6 @@ export default function AuthPage() {
         </div>
 
         <div className="mt-6 text-center text-xs text-gray-500 space-y-3">
-          <p className="text-[11px] text-gray-500 leading-normal">
-            By creating an account or signing in, you agree to Monerva's{' '}
-            <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline font-medium">Terms of Service</a>,{' '}
-            <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline font-medium">Privacy Policy</a>,{' '}
-            <a href="/acceptable-use" target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline font-medium">Acceptable Use Policy</a>, and{' '}
-            <a href="/ai-disclaimer" target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline font-medium">AI Disclaimer</a>.
-          </p>
-
           <div>
             {isLogin ? (
               <span>

@@ -44,7 +44,7 @@ export async function verifyTurnstileToken(
         errorCodes: ['timeout-or-duplicate']
       };
     }
-    if (trimmedToken === 'test-valid-token' || trimmedToken === '1x00000000000000000000AA' || (isTest && !secretKey)) {
+    if (trimmedToken === 'test-valid-token' || trimmedToken === '1x00000000000000000000AA' || secretKey === '1x00000000000000000000AA' || (isTest && !secretKey)) {
       return { success: true };
     }
   }
@@ -58,7 +58,8 @@ export async function verifyTurnstileToken(
         error: 'Authentication security verification service is unavailable. Contact administrator.'
       };
     } else {
-      console.warn('[Turnstile] TURNSTILE_SECRET_KEY not set in dev environment. Using Cloudflare test secret key.');
+      console.warn('[Turnstile] TURNSTILE_SECRET_KEY not set in dev environment. Bypassing remote siteverify check for local development.');
+      return { success: true };
     }
   }
 
