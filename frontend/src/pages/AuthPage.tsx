@@ -61,6 +61,13 @@ export default function AuthPage() {
     confirmPassword: '',
     baseCurrency: 'INR'
   });
+  const [consent, setConsent] = useState({
+    terms: false,
+    privacy: false,
+    acceptableUse: false,
+    aiDisclaimer: false
+  });
+  const [consentError, setConsentError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const [googleReady, setGoogleReady] = useState(false);
@@ -158,6 +165,20 @@ export default function AuthPage() {
       return;
     }
 
+    if (!consent.terms || !consent.privacy || !consent.acceptableUse || !consent.aiDisclaimer) {
+      setConsentError('You must accept all required agreements to continue.');
+      showToast('Please accept all required agreements to continue.', 'error');
+      return;
+    }
+
+    setConsentError(null);
+    if (!consent.terms || !consent.privacy || !consent.acceptableUse || !consent.aiDisclaimer) {
+      setConsentError('You must accept all required agreements to continue.');
+      showToast('Please accept all required agreements to continue.', 'error');
+      return;
+    }
+
+    setConsentError(null);
     setGoogleLoading(true);
     try {
       await googleLogin(response.credential, invitedBy);
@@ -195,6 +216,14 @@ export default function AuthPage() {
       return;
     }
 
+    if (!consent.terms || !consent.privacy || !consent.acceptableUse || !consent.aiDisclaimer) {
+      setConsentError('You must accept all required agreements to continue.');
+      showToast('Please accept all required agreements to continue.', 'error');
+      return;
+    }
+
+    setConsentError(null);
+
     setIsLoading(true);
     try {
       if (isLogin) {
@@ -226,6 +255,14 @@ export default function AuthPage() {
       return;
     }
 
+    if (!consent.terms || !consent.privacy || !consent.acceptableUse || !consent.aiDisclaimer) {
+      setConsentError('You must accept all required agreements to continue.');
+      showToast('Please accept all required agreements to continue.', 'error');
+      return;
+    }
+
+    setConsentError(null);
+
     setIsLoading(true);
     try {
       await login({ email: 'demo@example.com', password: 'password123', turnstileToken });
@@ -253,17 +290,7 @@ export default function AuthPage() {
         transition={{ duration: 0.35, ease: 'easeOut' }}
         className="w-full max-w-[440px] bg-white border border-[#E5E7EB] rounded-[32px] p-8 sm:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)]"
       >
-        <div className="mb-8">
-          <div className="w-12 h-12 rounded-full bg-[#111113] flex items-center justify-center">
-            <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="3" width="4" height="18" rx="2" fill="currentColor" />
-              <rect x="9" y="3" width="11" height="4" rx="2" fill="currentColor" />
-              <rect x="9" y="10" width="7" height="4" rx="2" fill="currentColor" />
-            </svg>
-          </div>
-        </div>
-
-        <div className="mb-8">
+        <div className="mb-10">
           <h1 className="text-[28px] font-bold tracking-tight text-[#111113] mb-2 font-display">
             {isLogin ? 'Sign in to Monerva' : 'Create your account'}
           </h1>
@@ -369,9 +396,41 @@ export default function AuthPage() {
             onError={() => setTurnstileToken(null)}
           />
 
+          <div className="mt-4 space-y-2">
+            {[
+              { id: 'terms-checkbox', key: 'terms' as const, text: 'I agree to the', linkText: 'Terms of Service', href: '/terms' },
+              { id: 'privacy-checkbox', key: 'privacy' as const, text: 'I agree to the', linkText: 'Privacy Policy', href: '/privacy' },
+              { id: 'acceptable-use-checkbox', key: 'acceptableUse' as const, text: 'I agree to the', linkText: 'Acceptable Use Policy', href: '/acceptable-use' },
+              { id: 'ai-disclaimer-checkbox', key: 'aiDisclaimer' as const, text: 'I accept the', linkText: 'AI Disclaimer', href: '/ai-disclaimer' },
+            ].map(({ id, key, text, linkText, href }) => (
+              <div key={id} className="flex items-center space-x-3">
+                <input
+                  id={id}
+                  type="checkbox"
+                  className="form-checkbox h-4 w-4 text-indigo-600"
+                  checked={consent[key]}
+                  onChange={() => setConsent(prev => ({...prev, [key]: !prev[key]}))}
+                />
+                <label
+                  className="text-sm font-medium text-[#18181A] cursor-pointer"
+                  htmlFor={id}
+                >
+                  {text}{' '}
+                  <a href={href} target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline">{linkText}</a>
+                </label>
+              </div>
+            ))}
+
+            {consentError && (
+              <div className="text-xs text-red-500 bg-red-50 border border-red-200 rounded-md p-1 mt-1">
+                {consentError}
+              </div>
+            )}
+          </div>
+
           <button
             type="submit"
-            disabled={isAnyLoading}
+            disabled={isAnyLoading || !turnstileToken || (!consent.terms || !consent.privacy || !consent.acceptableUse || !consent.aiDisclaimer)}
             className="w-full h-[50px] mt-2 rounded-2xl bg-[#111113] hover:bg-[#202023] active:scale-[0.99] text-white font-semibold text-sm transition-all duration-150 flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer shadow-[0_2px_10px_rgb(0,0,0,0.12)]"
           >
             {isLoading ? <span>Working...</span> : <span>{isLogin ? 'Sign in' : 'Create account'}</span>}

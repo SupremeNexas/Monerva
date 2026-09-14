@@ -27,6 +27,18 @@ const renderWithRouter = (ui: React.ReactElement) => {
   return render(<BrowserRouter>{ui}</BrowserRouter>);
 };
 
+/**
+ * Select all four required consent checkboxes.
+ * Turnstile auto-emits `test-valid-token` on mount in the test environment,
+ * so after selecting consent the submit button is enabled.
+ */
+const acceptAllConsent = () => {
+  const checkboxes = screen.getAllByRole('checkbox');
+  checkboxes.forEach(cb => {
+    if (!cb.checked) fireEvent.click(cb);
+  });
+};
+
 describe('AuthPage Cloudflare Turnstile Integration Suite', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -37,6 +49,9 @@ describe('AuthPage Cloudflare Turnstile Integration Suite', () => {
 
     expect(screen.getByText('Sign in to Monerva')).toBeInTheDocument();
     expect(screen.getByTestId('turnstile-container')).toBeInTheDocument();
+    expect(screen.getByLabelText('I agree to the Terms of Service')).toBeInTheDocument();
+    expect(screen.getByLabelText('I agree to the Privacy Policy')).toBeInTheDocument();
+    expect(screen.getByLabelText('I accept the AI Disclaimer')).toBeInTheDocument();
   });
 
   test('2. Blocks submission when Turnstile verification token is missing', async () => {
@@ -48,6 +63,8 @@ describe('AuthPage Cloudflare Turnstile Integration Suite', () => {
 
     fireEvent.change(emailInput, { target: { value: 'user@example.com' } });
     fireEvent.change(passwordInput, { target: { value: 'password123' } });
+
+    acceptAllConsent();
 
     const submitBtn = screen.getByRole('button', { name: /Sign in/i });
     fireEvent.click(submitBtn);
@@ -92,6 +109,8 @@ describe('AuthPage Cloudflare Turnstile Integration Suite', () => {
     fireEvent.change(passwordInputs[0], { target: { value: 'securePass123' } });
     fireEvent.change(passwordInputs[1], { target: { value: 'securePass123' } });
 
+    acceptAllConsent();
+
     const submitBtn = screen.getByRole('button', { name: /Create account/i });
     fireEvent.click(submitBtn);
 
@@ -105,5 +124,23 @@ describe('AuthPage Cloudflare Turnstile Integration Suite', () => {
         turnstileToken: 'test-valid-token'
       });
     });
+  });
+
+  test('5. Blocks sign in when consent checkboxes are not accepted', async () => {
+    renderWithRouter(<AuthPage />);
+
+    const emailInput = screen.getByPlaceholderText('you@company.com');
+    const passwordInput = screen.getByPlaceholderText('••••••••');
+
+    fireEvent.change(emailInput, { target: { value: 'user@example.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'password123' } });
+
+    // Do NOT accept consent checkboxes - submit button should be disabled
+    const submitBtn = screen.getByRole('button', { name: /Sign in/i });
+    expect(submitBtn).toBeDisabled();
+
+    // Fill all checkboxes to enable button
+    acceptAllConsent();
+    expect(submitBtn).not.toBeDisabled();
   });
 });
