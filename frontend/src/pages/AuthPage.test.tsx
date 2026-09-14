@@ -35,7 +35,7 @@ const renderWithRouter = (ui: React.ReactElement) => {
 const acceptAllConsent = () => {
   const checkboxes = screen.getAllByRole('checkbox');
   checkboxes.forEach(cb => {
-    if (!cb.checked) fireEvent.click(cb);
+    if (!(cb as HTMLInputElement).checked) fireEvent.click(cb);
   });
 };
 

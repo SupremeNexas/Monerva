@@ -172,13 +172,6 @@ export default function AuthPage() {
     }
 
     setConsentError(null);
-    if (!consent.terms || !consent.privacy || !consent.acceptableUse || !consent.aiDisclaimer) {
-      setConsentError('You must accept all required agreements to continue.');
-      showToast('Please accept all required agreements to continue.', 'error');
-      return;
-    }
-
-    setConsentError(null);
     setGoogleLoading(true);
     try {
       await googleLogin(response.credential, invitedBy);
